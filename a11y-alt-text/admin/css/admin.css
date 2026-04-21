@@ -1,0 +1,868 @@
+/* ==========================================================================
+   A11Y Plugin — admin.css
+   앨리 컬러 시스템 기반 전면 재작성
+   Tailwind 의존성 없음 — 순수 CSS 커스텀 프로퍼티 + WP 네이티브
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS 변수 — 앨리 공식 컬러 스케일
+   -------------------------------------------------------------------------- */
+:root {
+  /* Gray scale */
+  --a11y-gray-50: #f9fafb;
+  --a11y-gray-100: #f3f4f6;
+  --a11y-gray-200: #e5e7eb;
+  --a11y-gray-300: #d1d5db;
+  --a11y-gray-400: #9ca3af;
+  --a11y-gray-500: #6b7280;
+  --a11y-gray-600: #4b5563;
+  --a11y-gray-700: #1f2937;
+  --a11y-gray-800: #1a212b;
+  --a11y-gray-900: #0f1318;
+
+  /* Primary scale (blue) */
+  --a11y-primary-100: #eff6ff;
+  --a11y-primary-200: #dbeafe;
+  --a11y-primary-300: #bfdbfe;
+  --a11y-primary-400: #60a5fa;
+  --a11y-primary-500: #1364ff;
+  --a11y-primary-600: #0658f5;
+  --a11y-primary-700: #003fb7;
+
+  /* Secondary (lime accent) */
+  --a11y-secondary-500: #bafd02;
+
+  /* 시맨틱 단축 변수 */
+  --a11y-text: var(--a11y-gray-800);
+  --a11y-text-muted: var(--a11y-gray-500);
+  --a11y-text-subtle: var(--a11y-gray-400);
+  --a11y-border: var(--a11y-gray-200);
+  --a11y-border-strong: var(--a11y-gray-300);
+  --a11y-bg: var(--a11y-gray-50);
+  --a11y-bg-white: #ffffff;
+  --a11y-success: #007a1f;
+  --a11y-error: #d63638;
+  --a11y-warning-bg: #fffbeb;
+  --a11y-warning-border: #f59e0b;
+
+  /* Mock Mode 배너 (purple accent) */
+  --a11y-mock-purple: #534ab7;
+  --a11y-mock-purple-light: #f0eeff;
+}
+
+/* --------------------------------------------------------------------------
+   레이아웃 — 플러그인 페이지 래퍼
+   -------------------------------------------------------------------------- */
+.a11y-wrap {
+  /* max-width: 900px; */
+  margin-right: 20px;
+}
+
+/* WP admin footer 겹침 방지 */
+#wpbody-content {
+  padding-bottom: 80px;
+}
+
+/* ==========================================================================
+   웰컴 패널 (API Key 미입력 시)
+   ========================================================================== */
+.a11y-welcome-panel {
+  overflow: hidden;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  border: 1px solid var(--a11y-gray-200);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  background: linear-gradient(
+    120deg,
+    rgba(246, 255, 222, 1) 0%,
+    rgba(234, 255, 228, 1) 30%,
+    rgba(221, 242, 253, 1) 73%,
+    rgba(232, 239, 255, 1) 100%
+  );
+}
+
+/* 헤더: 로고 + "for WordPress" + Dismiss */
+.a11y-welcome-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 12px;
+}
+
+.a11y-welcome-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.a11y-welcome-header-sub {
+  font-size: 12px;
+  color: var(--a11y-gray-500);
+  font-weight: 400;
+  padding-left: 12px;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+  line-height: 1;
+}
+
+.a11y-welcome-dismiss {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--a11y-gray-500);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.a11y-welcome-dismiss:hover {
+  color: var(--a11y-gray-800);
+}
+
+/* 소개 문구 */
+.a11y-welcome-intro {
+  padding: 0 20px 16px;
+}
+.a11y-welcome-intro p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--a11y-gray-700);
+  line-height: 1.6;
+}
+
+.a11y-welcome-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 0 20px;
+}
+
+@media (max-width: 782px) {
+  .a11y-welcome-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.a11y-welcome-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 22px 16px;
+  text-align: center;
+  border-radius: 16px;
+  border: 1px solid var(--a11y-primary-300);
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* 번호 뱃지 — 검정 원형 */
+.a11y-welcome-card-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: #0658f5;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.a11y-welcome-card-title {
+  margin: 10px 0 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--a11y-gray-700);
+  line-height: 1.4;
+}
+
+.a11y-welcome-card-body {
+  margin: 0;
+  font-size: 13px;
+  color: var(--a11y-gray-700);
+  line-height: 1.55;
+}
+.a11y-welcome-card-body a {
+  color: var(--a11y-gray-700);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+.a11y-welcome-card-body a:hover {
+  text-decoration-style: solid;
+  color: var(--a11y-gray-900);
+}
+
+/* 풋터 — Mock Mode 상태 (글래스 패널) */
+.a11y-welcome-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 20px 20px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+
+.a11y-welcome-footer-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--a11y-error);
+  flex-shrink: 0;
+}
+
+.a11y-welcome-footer p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--a11y-gray-700);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   목업 모드 배너 (API Key 있을 때)
+   — 그라디언트 없이 단색 처리
+   ========================================================================== */
+.a11y-mock-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  margin: 0 0 16px;
+  background: var(--a11y-mock-purple-light);
+  border: 1px solid rgba(83, 74, 183, 0.25);
+  border-radius: 6px;
+}
+
+.a11y-mock-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: var(--a11y-mock-purple);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.a11y-mock-banner p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--a11y-gray-700);
+}
+
+/* ==========================================================================
+   네트워크 설정 제어 안내
+   ========================================================================== */
+.a11y-network-controlled-notice {
+  margin: 0 0 16px;
+}
+
+/* ==========================================================================
+   섹션 카드 — settings / history / csv-import 공통
+   — 깔끔한 흰 카드, 미세한 보더
+   ========================================================================== */
+.a11y-section-card {
+  margin-bottom: 20px;
+  background: var(--a11y-bg-white);
+  border: 1px solid var(--a11y-gray-200);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 0 0 0 transparent;
+}
+
+.a11y-section-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--a11y-gray-100);
+  background: var(--a11y-gray-50);
+  border-radius: 8px 8px 0 0;
+}
+
+.a11y-section-header h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--a11y-gray-800);
+  letter-spacing: -0.1px;
+}
+
+.a11y-section-header p {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: var(--a11y-gray-500);
+}
+
+.a11y-section-body {
+  padding: 0px 16px 6px;
+}
+
+/* ==========================================================================
+   Form Table — WP 네이티브 form-table 위에 오버레이
+   ========================================================================== */
+.a11y-settings-form .form-table th {
+  width: 220px;
+  padding: 16px 12px 16px 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--a11y-gray-700);
+  vertical-align: top;
+}
+
+.a11y-settings-form .form-table td {
+  padding: 14px 0;
+  vertical-align: top;
+}
+
+.a11y-settings-form .form-table tr {
+  border-bottom: 1px solid var(--a11y-gray-100);
+}
+
+.a11y-settings-form .form-table tr:last-child {
+  border-bottom: none;
+}
+
+/* 입력 필드 포커스 — primary blue */
+.a11y-settings-form input[type="text"]:focus,
+.a11y-settings-form input[type="password"]:focus,
+.a11y-settings-form select:focus,
+.a11y-settings-form textarea:focus {
+  border-color: var(--a11y-primary-500);
+  box-shadow: 0 0 0 1px var(--a11y-primary-500);
+  outline: none;
+}
+
+.a11y-settings-form .description {
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--a11y-gray-500);
+  font-style: normal;
+  line-height: 1.5;
+}
+
+/* 체크박스 행 */
+.a11y-checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 3px 0;
+}
+
+.a11y-checkbox-row input[type="checkbox"] {
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--a11y-primary-500);
+}
+
+.a11y-checkbox-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--a11y-gray-700);
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.a11y-checkbox-desc {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: var(--a11y-gray-500);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   API Key 상태 박스
+   ========================================================================== */
+.a11y-api-status {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 480px;
+  border-left-width: 3px;
+  border-left-style: solid;
+  border-radius: 0 6px 6px 0;
+}
+
+.a11y-api-status.is-empty {
+  background: var(--a11y-gray-50);
+  border-left-color: var(--a11y-gray-300);
+  color: var(--a11y-gray-600);
+}
+
+.a11y-api-status.is-error {
+  background: #fef2f2;
+  border-left-color: var(--a11y-error);
+  color: #7f1d1d;
+}
+
+.a11y-api-status.is-ok {
+  background: var(--a11y-primary-100);
+  border-left-color: var(--a11y-primary-500);
+  color: var(--a11y-gray-700);
+}
+
+.a11y-api-status a {
+  color: var(--a11y-primary-600);
+  text-decoration: none;
+}
+.a11y-api-status a:hover {
+  text-decoration: underline;
+  color: var(--a11y-primary-700);
+}
+
+/* ==========================================================================
+   버튼 — WP button-primary를 앨리 primary blue로 오버라이드
+   ========================================================================== */
+.a11y-settings-form .button-primary,
+#a11y-settings-form .button-primary {
+  background: var(--a11y-primary-500);
+  border-color: var(--a11y-primary-600);
+  color: #fff;
+  text-shadow: none;
+  box-shadow: none;
+}
+.a11y-settings-form .button-primary:hover,
+#a11y-settings-form .button-primary:hover {
+  background: var(--a11y-primary-600);
+  border-color: var(--a11y-primary-700);
+  color: #fff;
+}
+.a11y-settings-form .button-primary:focus,
+#a11y-settings-form .button-primary:focus {
+  box-shadow: 0 0 0 2px var(--a11y-primary-300);
+  outline: none;
+}
+
+.a11y-wrap .button {
+  font-weight: 600;
+  border-radius: 9px;
+}
+
+/* ==========================================================================
+   설정 페이지 하단 푸터 (버전 + 저장 버튼)
+   ========================================================================== */
+.a11y-settings-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--a11y-gray-100);
+}
+
+.a11y-version {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: var(--a11y-gray-400);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   상태 텍스트
+   ========================================================================== */
+.a11y-status-error {
+  color: var(--a11y-error);
+}
+.a11y-status-success {
+  color: var(--a11y-success);
+}
+.a11y-status-processing {
+  color: var(--a11y-primary-500);
+}
+
+/* ==========================================================================
+   이미지 유형 뱃지 (미디어 첨부 필드)
+   ========================================================================== */
+.a11y-type-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.a11y-type-badge.a11y-type-complex {
+  background: var(--a11y-primary-100);
+  color: var(--a11y-primary-700);
+}
+
+.a11y-type-badge.a11y-type-simple {
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.a11y-generated-at {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--a11y-gray-400);
+}
+
+/* ==========================================================================
+   에러 로그
+   ========================================================================== */
+.a11y-error-log {
+  overflow-y: auto;
+  min-height: 80px;
+  max-height: 120px;
+  padding: 8px 10px;
+  background: var(--a11y-gray-50);
+  border: 1px solid var(--a11y-gray-200);
+  border-radius: 5px;
+  font-size: 12px;
+  color: var(--a11y-gray-500);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   벌크 생성 — 통계 카드 그리드
+   — 단색 흰 카드, 보더 1px로 구분
+   ========================================================================== */
+.a11y-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--a11y-gray-200);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: var(--a11y-gray-200); /* 카드 사이 구분선 역할 */
+}
+
+@media (max-width: 1024px) {
+  .a11y-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .a11y-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.a11y-stat-card {
+  background: var(--a11y-bg-white);
+  padding: 18px 20px;
+}
+
+.a11y-stat-label {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: var(--a11y-gray-500);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.a11y-stat-sub {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.a11y-stat-sub.is-ok {
+  color: var(--a11y-success);
+}
+.a11y-stat-sub.is-warn {
+  color: var(--a11y-error);
+}
+.a11y-stat-sub.is-muted {
+  color: var(--a11y-gray-400);
+}
+
+.a11y-stat-value {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--a11y-gray-800);
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+/* ==========================================================================
+   벌크 생성 — 옵션 박스 (Keywords, Processing Options)
+   ========================================================================== */
+.a11y-option-box {
+  margin-bottom: 16px;
+  background: var(--a11y-bg-white);
+  border: 1px solid var(--a11y-gray-200);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.a11y-option-box-header {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--a11y-gray-100);
+  background: var(--a11y-gray-50);
+}
+
+.a11y-option-box-header h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--a11y-gray-800);
+}
+
+.a11y-option-box-body {
+  padding: 16px;
+}
+
+/* 2열 그리드 (Keywords 섹션) */
+.a11y-option-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 782px) {
+  .a11y-option-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.a11y-input-label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--a11y-gray-700);
+}
+
+.a11y-input-sub {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--a11y-gray-400);
+  margin-left: 3px;
+}
+
+.a11y-input-desc {
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--a11y-gray-500);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   벌크 생성 — 경고 박스
+   ========================================================================== */
+.a11y-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  border-radius: 8px;
+}
+
+.a11y-alert.is-warning {
+  background: var(--a11y-warning-bg);
+  border: 1px solid var(--a11y-warning-border);
+}
+
+.a11y-alert-icon {
+  flex-shrink: 0;
+  color: #d97706;
+}
+
+.a11y-alert-msg {
+  flex: 1;
+  font-size: 13px;
+  color: var(--a11y-gray-700);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   벌크 생성 — 진행 표시 박스
+   ========================================================================== */
+.a11y-progress-box {
+  display: none;
+  margin-bottom: 20px;
+  background: var(--a11y-bg-white);
+  border: 1px solid var(--a11y-gray-200);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.a11y-progress-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--a11y-gray-100);
+  background: var(--a11y-gray-50);
+}
+
+.a11y-progress-header h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--a11y-gray-800);
+}
+
+.a11y-progress-body {
+  padding: 16px;
+}
+
+.a11y-progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--a11y-gray-700);
+}
+
+.a11y-progress-track {
+  width: 100%;
+  height: 6px;
+  background: var(--a11y-gray-100);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+/* 진행 바 — primary blue */
+.a11y-progress-bar {
+  height: 100%;
+  background: var(--a11y-primary-500);
+  border-radius: 3px;
+  transition: width 0.7s ease-in-out;
+  min-width: 3px;
+}
+
+.a11y-progress-stats {
+  padding: 10px 14px;
+  background: var(--a11y-gray-50);
+  border-radius: 6px;
+  border: 1px solid var(--a11y-gray-100);
+  font-size: 13px;
+  color: var(--a11y-gray-700);
+  margin-bottom: 14px;
+}
+.a11y-progress-stats p {
+  margin: 2px 0;
+}
+
+.a11y-count-success {
+  color: var(--a11y-success);
+  font-weight: 600;
+}
+.a11y-count-skip {
+  color: var(--a11y-gray-500);
+  font-weight: 600;
+}
+
+.a11y-last-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  background: var(--a11y-bg-white);
+  padding: 1px 5px;
+  border: 1px solid var(--a11y-gray-200);
+  border-radius: 3px;
+  color: var(--a11y-gray-600);
+}
+
+/* ==========================================================================
+   버튼 행
+   ========================================================================== */
+.a11y-btn-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* ==========================================================================
+   히스토리 페이지 — 테이블
+   ========================================================================== */
+.a11y-section-card .wp-list-table th {
+  background: var(--a11y-gray-50);
+  color: var(--a11y-gray-600);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.a11y-section-card .wp-list-table td {
+  color: var(--a11y-gray-700);
+  font-size: 13px;
+}
+
+/* 인라인 편집 성공 메시지 */
+.a11y-history-update-btn {
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   CSV Import — 드롭존
+   ========================================================================== */
+.a11y-csv-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 32px 24px;
+  border: 2px dashed var(--a11y-gray-300);
+  border-radius: 8px;
+  background: var(--a11y-gray-50);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.a11y-csv-dropzone:hover,
+.a11y-csv-dropzone:focus {
+  border-color: var(--a11y-primary-500);
+  background: var(--a11y-primary-100);
+  outline: none;
+}
+
+#alttextai-csv-import[data-file-loaded="true"] .a11y-csv-dropzone {
+  border-color: var(--a11y-success);
+  background: #f0fdf4;
+}
+
+/* ==========================================================================
+   네트워크 비활성화 폼 — 입력 필드 흐림 처리
+   ========================================================================== */
+.a11y-network-controlled input[disabled],
+.a11y-network-controlled select[disabled],
+.a11y-network-controlled textarea[disabled] {
+  background-color: var(--a11y-gray-100) !important;
+  color: var(--a11y-gray-400) !important;
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+}
+
+/* ==========================================================================
+   반응형
+   ========================================================================== */
+@media (max-width: 782px) {
+  .a11y-settings-form .form-table th,
+  .a11y-settings-form .form-table td {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .a11y-wrap {
+    margin-right: 10px;
+  }
+}

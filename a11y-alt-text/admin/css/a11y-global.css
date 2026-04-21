@@ -1,0 +1,294 @@
+/* Custom classes needed for JS dynamic buttons */
+
+.a11y-generate-button,
+#a11y-post-generate-button {
+  margin-top: 0.375rem !important;
+  margin-bottom: 0.625rem !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.a11y-generate-button__keywords-checkbox,
+#a11y-generate-button-overwrite-checkbox,
+#a11y-generate-button-process-external-checkbox,
+#a11y-generate-button-keywords-checkbox {
+  margin-top: 0 !important;
+}
+
+.a11y-generate-button__keywords-checkbox-wrapper {
+  margin: 0.5rem 0 0.25rem;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: rgb(17, 24, 39);
+}
+
+.a11y-generate-button__keywords-textfield-wrapper input {
+  max-width: 100% !important;
+}
+
+.a11y-generate-button a,
+#a11y-post-generate-button a {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.375rem !important;
+  cursor: pointer !important;
+  padding: 0.5rem 1rem 0.5rem 0.75rem !important;
+  font-size: 0.925rem !important;
+  line-height: 1.5rem !important;
+  font-weight: 500 !important;
+  border-radius: 0.375rem !important;
+  border: 1px solid transparent !important;
+  background-color: rgb(37, 99, 235) !important;
+  color: rgb(255, 255, 255) !important;
+  box-shadow: 0 0 0 1px transparent, 0 0 0 1px transparent, 0 0 #0000 !important;
+  transition: color 75ms, background-color 75ms !important;
+}
+
+/* Allow JavaScript to hide buttons during processing */
+.a11y-generate-button.a11y-hidden,
+#a11y-post-generate-button.a11y-hidden,
+#a11y-start-over-button.a11y-hidden,
+[data-bulk-generate-start].a11y-hidden,
+button.a11y-hidden {
+  display: none !important;
+}
+
+/* Hide the alt text paragraph, breaks on certain screensizes */
+.a11y-generate-button + .description {
+  display: none !important;
+}
+
+.a11y-generate-button span,
+#a11y-post-generate-button span {
+  color: rgb(255, 255, 255) !important;
+}
+
+.a11y-generate-button a:hover,
+#a11y-post-generate-button a:hover {
+  background-color: rgb(29, 78, 216) !important;
+}
+
+.a11y-generate-button a:focus,
+#a11y-post-generate-button a:focus {
+  outline: 2px solid transparent !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 3px rgb(147, 197, 253) !important;
+}
+
+.a11y-generate-button a:active,
+#a11y-post-generate-button a:active {
+  box-shadow: 0 0 0 3px rgb(107, 114, 128, 0.5) !important;
+}
+
+.a11y-generate-button a:focus:disabled,
+#a11y-post-generate-button a:focus:disabled,
+.a11y-generate-button a:active:disabled,
+#a11y-post-generate-button a:active:disabled {
+  box-shadow: none !important;
+}
+
+.a11y-generate-button img,
+#a11y-post-generate-button img {
+  width: 1.75rem;
+}
+
+.a11y-generate-button .disabled,
+#a11y-post-generate-button .disabled {
+  pointer-events: none !important;
+  color: rgb(0, 0, 0) !important;
+}
+
+.a11y-generate-button .disabled + label {
+  pointer-events: none !important;
+  color: rgb(156, 163, 175) !important;
+}
+
+.a11y-generate-button .a11y-update-notice,
+#a11y-post-generate-button .a11y-update-notice {
+  visibility: hidden;
+  margin-top: 5px;
+  display: block;
+}
+
+.a11y-generate-button .a11y-update-notice--success,
+#a11y-post-generate-button .a11y-update-notice--success {
+  visibility: visible;
+  color: rgb(5, 150, 105);
+}
+
+.a11y-generate-button .a11y-update-notice--error,
+#a11y-post-generate-button .a11y-update-notice--error {
+  visibility: visible;
+  color: rgb(220, 38, 38);
+}
+
+[data-post-bulk-generate-keywords-checkbox]:checked
+  ~ [data-post-bulk-generate-keywords] {
+  display: block;
+}
+
+#a11y-generate-meta-box .inside > :not([hidden]) ~ :not([hidden]) {
+  margin: 0.25rem 0;
+}
+
+/* Keywords inside the Gutenberg box */
+#a11y-generate-button-keywords-checkbox + label + input {
+  margin-top: 0.5rem;
+}
+
+.media-sidebar #a11y-post-generate-button a,
+.media-sidebar .a11y-generate-button a {
+  padding: 0.4rem 0.8rem !important;
+  font-size: 0.85rem !important;
+}
+
+.a11y-network-settings-container {
+  max-width: 800px;
+  margin-top: 20px;
+}
+
+.a11y-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.a11y-card-header {
+  margin-bottom: 20px;
+}
+
+.a11y-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.a11y-card-description {
+  color: #646970;
+  font-size: 14px;
+  margin: 0;
+}
+
+.a11y-card-body {
+  margin-top: 16px;
+}
+
+.a11y-form-actions {
+  margin-top: 20px;
+}
+
+/* Make sure button styling is consistent */
+.a11y-form-actions .button-primary {
+  background-color: #2271b1;
+  border-color: #2271b1;
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.a11y-form-actions .button-primary:hover {
+  background-color: #135e96;
+  border-color: #135e96;
+}
+
+/* Network-controlled form styles */
+.a11y-network-controlled input[disabled],
+.a11y-network-controlled select[disabled],
+.a11y-network-controlled textarea[disabled] {
+  background-color: #f3f4f6 !important;
+  color: #6b7280 !important;
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+}
+
+.a11y-network-controlled-notice {
+  border-radius: 4px;
+}
+
+/* Processing state for buttons - using Tailwind blue variants */
+.a11y-generate-button .a11y-generate-button__anchor.a11y-processing.disabled,
+.a11y-generate-button__anchor.a11y-processing {
+  background-color: rgb(59, 130, 246) !important; /* blue-500 */
+  color: rgb(255, 255, 255) !important; /* white */
+  border-color: rgb(59, 130, 246) !important; /* blue-500 */
+  opacity: 1 !important;
+  pointer-events: none !important;
+  padding-right: 1.5rem !important; /* Extra padding for animated dots */
+}
+
+/* Processing dots animation for single image generation buttons */
+.a11y-processing-dots::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  animation: a11y-dots 1.4s infinite;
+}
+
+@keyframes a11y-dots {
+  0%,
+  20% {
+    content: "";
+  }
+  40% {
+    content: ".";
+  }
+  60% {
+    content: "..";
+  }
+  80%,
+  100% {
+    content: "...";
+  }
+}
+
+/* Bulk processing page animations */
+.a11y-progress-pulse {
+  position: relative;
+  overflow: hidden;
+}
+
+.a11y-progress-pulse::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: a11y-progress-shimmer 2s infinite;
+}
+
+@keyframes a11y-progress-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.a11y-heartbeat {
+  animation: a11y-heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes a11y-heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.9;
+  }
+}
