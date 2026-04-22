@@ -1,11 +1,10 @@
 <?php
 /**
  * Plugin Name: A11Y - AI Alt Text & Accessibility
- * Plugin URI: https://a11y.so
  * Description: AI 기반 이미지 대체 텍스트 + 접근성 구조(aria-describedby) 자동 생성
  * Version: 0.1.0
- * Author: InSequence
- * Author URI: https://a11y.so
+ * Author: A11Y.SO
+ * Author URI: https://a11y.so/
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: a11y-alt-text

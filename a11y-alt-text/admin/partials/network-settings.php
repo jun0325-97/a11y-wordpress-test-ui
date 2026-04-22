@@ -3,7 +3,7 @@
 /**
  * Network Settings page for the A11Y plugin
  *
- * @link       https://www.alttext.ai
+ * @link       https://www.a11y.so
  * @since      1.10.16
  *
  * @package    AltText_AI

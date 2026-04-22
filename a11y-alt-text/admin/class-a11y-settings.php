@@ -2,7 +2,7 @@
 /**
  * The options handling functionality of the plugin.
  *
- * @link       https://alttext.ai
+ * @link       https://a11y.so
  * @since      1.0.0
  *
  * @package    A11Y
@@ -16,7 +16,7 @@
  *
  * @package    A11Y
  * @subpackage A11Y/admin
- * @author     A11Y <info@alttext.ai>
+ * @author     A11Y <info@a11y.so>
  */
 class A11Y_Settings {
   /**

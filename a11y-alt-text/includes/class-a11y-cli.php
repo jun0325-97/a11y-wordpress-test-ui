@@ -2,7 +2,7 @@
 /**
  * WP-CLI commands for A11Y plugin.
  *
- * @link       https://alttext.ai
+ * @link       https://a11y.so
  * @since      1.10.23
  *
  * @package    A11Y

@@ -5,7 +5,7 @@
  * Allows super admins to view missing alt text across all
  * network sites and process them from one central location.
  *
- * @link       https://www.alttext.ai
+ * @link       https://www.a11y.so
  * @since      1.10.20
  *
  * @package    AltText_AI

@@ -10,7 +10,7 @@ if ( ! function_exists( 'is_plugin_active' ) ) {
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://alttext.ai
+ * @link       https://a11y.so
  * @since      1.0.0
  *
  * @package    A11Y
@@ -29,7 +29,7 @@ if ( ! function_exists( 'is_plugin_active' ) ) {
  * @since      1.0.0
  * @package    A11Y
  * @subpackage A11Y/includes
- * @author     A11Y <info@alttext.ai>
+ * @author     A11Y <info@a11y.so>
  */
 class A11Y {
 	/**

@@ -2,7 +2,7 @@
 /**
  * House for utility methods
  *
- * @link       https://alttext.ai
+ * @link       https://a11y.so
  * @since      1.0.0
  *
  * @package    A11Y
@@ -17,7 +17,7 @@
  * @since      1.0.0
  * @package    A11Y
  * @subpackage A11Y/includes
- * @author     A11Y <info@alttext.ai>
+ * @author     A11Y <info@a11y.so>
  */
 if ( ! class_exists( 'A11Y_Utility' ) ) {
 class A11Y_Utility {
@@ -756,7 +756,7 @@ SQL;
    * @access public
    */
   public static function get_credits_url() {
-    $base_url = "https://alttext.ai/subscriptions?utm_source=wp&utm_medium=dl";
+    $base_url = "https://a11y.so/subscriptions?utm_source=wp&utm_medium=dl";
 
     if ( get_option("a11y_woo_marketplace", "no") === "yes" ) {
       $base_url .= "&woocommerce=1";

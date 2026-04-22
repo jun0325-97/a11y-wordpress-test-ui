@@ -69,6 +69,7 @@
 .a11y-welcome-panel {
   overflow: hidden;
   margin-bottom: 20px;
+  padding: 20px 8px;
   border-radius: 16px;
   border: 1px solid var(--a11y-gray-200);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -159,7 +160,7 @@
   backdrop-filter: blur(8px);
 }
 
-/* 번호 뱃지 — 검정 원형 */
+/* 번호 뱃지 */
 .a11y-welcome-card-num {
   display: flex;
   align-items: center;
@@ -199,7 +200,7 @@
   color: var(--a11y-gray-900);
 }
 
-/* 풋터 — Mock Mode 상태 (글래스 패널) */
+/* 풋터 — Mock Mode 상태 */
 .a11y-welcome-footer {
   display: flex;
   align-items: center;
@@ -230,7 +231,6 @@
 
 /* ==========================================================================
    목업 모드 배너 (API Key 있을 때)
-   — 그라디언트 없이 단색 처리
    ========================================================================== */
 .a11y-mock-banner {
   display: flex;
@@ -273,7 +273,6 @@
 
 /* ==========================================================================
    섹션 카드 — settings / history / csv-import 공통
-   — 깔끔한 흰 카드, 미세한 보더
    ========================================================================== */
 .a11y-section-card {
   margin-bottom: 20px;
@@ -311,6 +310,11 @@
 /* ==========================================================================
    Form Table — WP 네이티브 form-table 위에 오버레이
    ========================================================================== */
+.a11y-wrap .a11y-settings-heading {
+  font-weight: 700;
+  font-size: 28px;
+}
+
 .a11y-settings-form .form-table th {
   width: 220px;
   padding: 16px 12px 16px 0;
@@ -532,7 +536,6 @@
 
 /* ==========================================================================
    벌크 생성 — 통계 카드 그리드
-   — 단색 흰 카드, 보더 1px로 구분
    ========================================================================== */
 .a11y-stats-grid {
   display: grid;

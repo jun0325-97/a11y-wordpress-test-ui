@@ -141,7 +141,7 @@
   </div>
   <?php endif; ?>
 
-  <h1><?php esc_html_e( 'A11Y Settings', 'a11y-alt-text' ); ?></h1>
+  <h1 class="a11y-settings-heading"><?php esc_html_e( 'A11Y Settings', 'a11y-alt-text' ); ?></h1>
   <?php settings_errors(); ?>
 
   <?php if ( $settings_network_controlled || $api_key_locked ) : ?>

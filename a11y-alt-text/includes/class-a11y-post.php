@@ -3,7 +3,7 @@
  * The file that handles the post-related functionality of the plugin.
  *
  *
- * @link       https://alttext.ai
+ * @link       https://a11y.so
  * @since      1.0.46
  *
  * @package    A11Y
@@ -19,7 +19,7 @@
  * @since      1.0.46
  * @package    A11Y
  * @subpackage A11Y/includes
- * @author     A11Y <info@alttext.ai>
+ * @author     A11Y <info@a11y.so>
  */
 class A11Y_Post {
 

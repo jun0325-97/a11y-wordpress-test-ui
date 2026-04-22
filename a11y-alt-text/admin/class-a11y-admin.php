@@ -2,7 +2,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://alttext.ai
+ * @link       https://a11y.so
  * @since      1.0.0
  *
  * @package    A11Y
@@ -17,7 +17,7 @@
  *
  * @package    A11Y
  * @subpackage A11Y/admin
- * @author     A11Y <info@alttext.ai>
+ * @author     A11Y <info@a11y.so>
  */
 class A11Y_Admin {
 	/**
@@ -103,7 +103,7 @@ class A11Y_Admin {
    */
   public function modify_plugin_row_meta( $links_array, $plugin_file_name, $plugin_data, $status ) {
     if ( strpos( $plugin_file_name, basename(A11Y_PLUGIN_FILE) ) ) {
-      $links_array[] = '<a href="https://alttext.ai/docs/integrations/wordpress/" target="_blank" rel="noopener noreferrer">' .
+      $links_array[] = '<a href="https://help.a11y.so/en" target="_blank" rel="noopener noreferrer">' .
        __('Documentation', 'a11y-alt-text') .
        '</a>';
     }

@@ -1,6 +1,6 @@
 === Alt Text AI - Automatically generate image alt text for SEO and accessibility  ===
 Contributors: alttextai,junaidkbr
-Donate link: https://alttext.ai/
+Donate link: https://a11y.so/
 Tags: image alt text, AI,  accessibility, alternative text, image to text
 Requires PHP: 7.4
 Requires at least: 4.7
@@ -10,7 +10,7 @@ WC requires at least: 3.3
 WC tested up to: 10.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Terms of use: https://alttext.ai/terms
+Terms of use: https://a11y.so/terms
 
 Automatically sets the descriptive alt text of your images. Boosts your SEO and accessibility.
 
@@ -46,13 +46,13 @@ https://youtu.be/LpMXPbMds4U
 1. **Visit** Plugins > Add New
 2. **Search** for "Alt Text AI"
 3. **Install and Activate** Alt Text AI from your Plugins page
-4. **Visit** [https://alttext.ai](https://alttext.ai?utm_source=wp&utm_medium=dl) to sign up for a free trial or paid plan.
+4. **Visit** [https://a11y.so](https://a11y.so?utm_source=wp&utm_medium=dl) to sign up for a free trial or paid plan.
 5. **Link** your account by copying your API key into the Alt Text AI plugin settings page.
 6. **Upload** an image to have alt text generated automatically!
 
 == Frequently Asked Questions ==
 
-See [our FAQ](https://alttext.ai/support?utm_source=wp&utm_medium=dl) for answers to our most common questions.
+See [our FAQ](https://a11y.so/support?utm_source=wp&utm_medium=dl) for answers to our most common questions.
 
 == Screenshots ==
 
