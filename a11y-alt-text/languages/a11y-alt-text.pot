@@ -1,0 +1,1121 @@
+# Copyright (C) 2026 A11Y.SO
+# This file is distributed under the GPL-2.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: A11Y - AI Alt Text & Accessibility 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/a11y-alt-text\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-04-22T07:21:54+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: a11y-alt-text\n"
+
+#. Plugin Name of the plugin
+#: a11y.php
+msgid "A11Y - AI Alt Text & Accessibility"
+msgstr ""
+
+#. Description of the plugin
+#: a11y.php
+msgid "AI 기반 이미지 대체 텍스트 + 접근성 구조(aria-describedby) 자동 생성"
+msgstr ""
+
+#. Author of the plugin
+#: a11y.php
+msgid "A11Y.SO"
+msgstr ""
+
+#. Author URI of the plugin
+#: a11y.php
+msgid "https://a11y.so/"
+msgstr ""
+
+#: admin/class-a11y-admin.php:107
+msgid "Documentation"
+msgstr ""
+
+#: admin/class-a11y-admin.php:131
+#, php-format
+msgid "[A11Y] Thanks for installing A11Y! To complete setup, please <a href=\"%s\">go to the settings page.</a>"
+msgstr ""
+
+#: admin/class-a11y-settings.php:94
+msgid "A11Y WordPress Settings"
+msgstr ""
+
+#: admin/class-a11y-settings.php:95
+#: admin/class-a11y-settings.php:169
+#: admin/class-a11y-settings.php:1059
+#: includes/class-a11y-attachment.php:1824
+#: includes/class-a11y-post.php:64
+#: includes/class-a11y-post.php:72
+#: includes/class-a11y-post.php:81
+msgid "A11Y"
+msgstr ""
+
+#: admin/class-a11y-settings.php:105
+#: admin/class-a11y-settings.php:106
+msgid "Settings"
+msgstr ""
+
+#: admin/class-a11y-settings.php:118
+#: admin/class-a11y-settings.php:119
+msgid "Bulk Generate"
+msgstr ""
+
+#: admin/class-a11y-settings.php:132
+#: admin/class-a11y-settings.php:133
+msgid "History"
+msgstr ""
+
+#: admin/class-a11y-settings.php:145
+#: admin/class-a11y-settings.php:146
+msgid "Sync Library"
+msgstr ""
+
+#: admin/class-a11y-settings.php:168
+msgid "A11Y Network Settings"
+msgstr ""
+
+#: admin/class-a11y-settings.php:204
+msgid "A11Y Network Bulk Generate"
+msgstr ""
+
+#: admin/class-a11y-settings.php:205
+msgid "A11Y Bulk Generate"
+msgstr ""
+
+#: admin/class-a11y-settings.php:905
+msgid "Your API key is not valid."
+msgstr ""
+
+#: admin/class-a11y-settings.php:906
+msgid "Unable to verify your API key right now. Please check your connection and try again."
+msgstr ""
+
+#: admin/class-a11y-settings.php:930
+#, php-format
+msgid "API Key saved. Pro tip: Add alt text to all your existing images with our <a href=\"%s\" class=\"font-medium text-primary-600 hover:text-primary-500\">Bulk Generate</a> feature!"
+msgstr ""
+
+#: admin/class-a11y-settings.php:1004
+msgid "You do not have permission to manage network settings."
+msgstr ""
+
+#: admin/class-a11y-settings.php:1009
+#: admin/class-a11y-settings.php:1168
+msgid "Security check failed."
+msgstr ""
+
+#: admin/class-a11y-settings.php:1052
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: admin/class-a11y-settings.php:1058
+#: includes/class-a11y-attachment.php:1823
+msgid "Security verification failed. Please refresh the page and try again."
+msgstr ""
+
+#: admin/class-a11y-settings.php:1092
+#, php-format
+msgid "[A11Y] You have no more credits available. <a href=\"%s\" target=\"_blank\">Manage your account</a> to get more credits."
+msgstr ""
+
+#: admin/class-a11y-settings.php:1112
+msgid "Notice expired."
+msgstr ""
+
+#: admin/class-a11y-settings.php:1134
+msgid "[A11Y] Please <strong>add your API key</strong> to generate alt text."
+msgstr ""
+
+#: admin/class-a11y-settings.php:1174
+#: includes/class-a11y-attachment.php:2487
+#: includes/class-a11y-attachment.php:2569
+msgid "Insufficient permissions."
+msgstr ""
+
+#: admin/class-a11y-settings.php:1184
+msgid "Setting updated successfully."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:152
+msgid "Bulk Generate Alt Text"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:153
+msgid "Automatically generate alt text for multiple images at once. Improve accessibility across your entire media library."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:159
+msgid "Selected Images"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:165
+#: admin/partials/network-bulk-generate.php:42
+msgid "Total Images"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:170
+#: admin/partials/network-bulk-generate.php:43
+msgid "Missing Alt Text"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:177
+msgid "With Alt Text"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:184
+msgid "Available Credits"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:187
+msgid "Unavailable"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:194
+msgid "N/A"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:212
+msgid "Your API key appears to be invalid. Please update it in Settings before running Bulk Generate."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:214
+msgid "Unable to verify your account. Please check your API key in Settings, or try reloading this page."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:217
+msgid "You have no more credits left. To bulk update your library, you need to purchase more credits."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:222
+msgid "Purchase Credits"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:235
+#: admin/partials/bulk-generate.php:241
+msgid "Keywords"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:249
+msgid "Enter keywords separated by commas"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:253
+msgid "Try to include these in the generated alt text. Maximum of 6 keywords or phrases."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:258
+msgid "Negative Keywords"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:266
+msgid "Enter negative keywords separated by commas"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:270
+msgid "Do not include these in the generated alt text. Maximum of 6 keywords or phrases."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:281
+msgid "Processing Options"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:292
+#: includes/class-a11y-post.php:124
+msgid "Overwrite existing alt text"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:295
+msgid "Include images that already have alt text and replace their existing alt text."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:307
+msgid "Only attached images"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:310
+msgid "Only process images that are attached to posts or pages."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:322
+msgid "Skip previously processed"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:325
+msgid "Skip images that have already been processed by A11Y."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:334
+msgid "WooCommerce Options"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:342
+msgid "Only process WooCommerce product images."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:351
+msgid "For each product, only process the main image and skip gallery images."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:369
+#: includes/class-a11y-attachment.php:2022
+#: admin/js/admin.js:473
+msgid "Generate Alt Text"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:371
+#: admin/js/admin.js:515
+#, php-format,js-format
+msgid "Generate Alt Text for %d Image"
+msgid_plural "Generate Alt Text for %d Images"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/partials/bulk-generate.php:377
+#: admin/js/admin.js:430
+msgid "Start Over"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:387
+#: admin/js/admin.js:1218
+msgid "Processing Images"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:390
+msgid "Please keep this page open until the update completes."
+msgstr ""
+
+#: admin/partials/bulk-generate.php:429
+#: admin/partials/network-bulk-generate.php:90
+msgid "Cancel"
+msgstr ""
+
+#: admin/partials/bulk-generate.php:435
+msgid "View Summary"
+msgstr ""
+
+#: admin/partials/csv-import.php:42
+msgid "Sync Alt Text Library"
+msgstr ""
+
+#: admin/partials/csv-import.php:44
+msgid "Synchronize any changes or edits from your online A11Y image library to WordPress. Any matching images in WordPress will be updated with the corresponding alt text from your library."
+msgstr ""
+
+#: admin/partials/csv-import.php:59
+msgid "Step 1: Export your online library"
+msgstr ""
+
+#: admin/partials/csv-import.php:66
+#, php-format
+msgid "Go to your <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">A11Y Image Library</a>."
+msgstr ""
+
+#: admin/partials/csv-import.php:72
+msgid "Click the Export button."
+msgstr ""
+
+#: admin/partials/csv-import.php:73
+msgid "Start the export, then download the CSV file when it's done."
+msgstr ""
+
+#: admin/partials/csv-import.php:81
+msgid "Step 2: Upload your CSV"
+msgstr ""
+
+#: admin/partials/csv-import.php:99
+msgid "Choose or drag and drop a CSV file"
+msgstr ""
+
+#: admin/partials/csv-import.php:125
+msgid "Step 3: Select Language"
+msgstr ""
+
+#: admin/partials/csv-import.php:128
+msgid "Your CSV contains alt text in multiple languages. Choose which language to import:"
+msgstr ""
+
+#: admin/partials/csv-import.php:132
+#: admin/js/admin.js:2172
+msgid "Default (alt_text column)"
+msgstr ""
+
+#: admin/partials/csv-import.php:137
+msgid "Selecting \"Default\" uses the main alt_text column. This is backward compatible with older exports."
+msgstr ""
+
+#: admin/partials/csv-import.php:143
+msgid "Import"
+msgstr ""
+
+#: admin/partials/csv-import.php:160
+msgid "Do you like A11Y? Leave us a review!"
+msgstr ""
+
+#: admin/partials/csv-import.php:163
+msgid "Help spread the word on WordPress.org. We'd really appreciate it!"
+msgstr ""
+
+#: admin/partials/csv-import.php:166
+msgid "Leave your review →"
+msgstr ""
+
+#: admin/partials/history.php:50
+msgid "Alt Text Processing History"
+msgstr ""
+
+#: admin/partials/history.php:51
+msgid "Below is a list of all images from your Media Library which have been processed by A11Y."
+msgstr ""
+
+#: admin/partials/history.php:64
+msgid "No media files have been processed yet."
+msgstr ""
+
+#: admin/partials/history.php:69
+#, php-format
+msgid "Use the <a href=\"%s\">Bulk Generate</a> tool to get started on your existing images."
+msgstr ""
+
+#: admin/partials/history.php:84
+msgid "Media ID"
+msgstr ""
+
+#: admin/partials/history.php:85
+msgid "Image"
+msgstr ""
+
+#: admin/partials/history.php:86
+msgid "Alt Text"
+msgstr ""
+
+#: admin/partials/history.php:87
+msgid "Processed On"
+msgstr ""
+
+#: admin/partials/history.php:165
+#, php-format
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/partials/network-bulk-generate.php:27
+msgid "Network Image Statistics"
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:28
+msgid "Alt text status across all sites in your network."
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:33
+msgid "Loading site statistics..."
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:37
+msgid "Network site image statistics"
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:40
+msgid "Select all sites"
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:41
+msgid "Site"
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:44
+msgid "Status"
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:52
+msgid "Total"
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:61
+msgid "Failed to load site statistics."
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:68
+msgid "Processing Progress"
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:78
+msgid "Alt text generation progress"
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:81
+msgid "Waiting to start..."
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:87
+msgid "Generate Alt Text for Selected Sites"
+msgstr ""
+
+#: admin/partials/network-bulk-generate.php:93
+msgid "Refresh Stats"
+msgstr ""
+
+#: admin/partials/network-settings.php:24
+msgid "Network settings saved successfully."
+msgstr ""
+
+#: admin/partials/network-settings.php:34
+msgid "Network Settings"
+msgstr ""
+
+#: admin/partials/network-settings.php:35
+msgid "Configure network-wide settings for A11Y"
+msgstr ""
+
+#: admin/partials/network-settings.php:40
+msgid "API Key Management"
+msgstr ""
+
+#: admin/partials/network-settings.php:52
+msgid "Apply main site API key to all subsites"
+msgstr ""
+
+#: admin/partials/network-settings.php:56
+msgid "When enabled, all subsites will use the API key from the main site."
+msgstr ""
+
+#: admin/partials/network-settings.php:61
+msgid "Settings Synchronization"
+msgstr ""
+
+#: admin/partials/network-settings.php:73
+msgid "Apply all settings from main site to all subsites"
+msgstr ""
+
+#: admin/partials/network-settings.php:77
+msgid "When enabled, all plugin settings from the main site will be applied to all subsites. Settings on subsites will be disabled and they will use the main site settings."
+msgstr ""
+
+#: admin/partials/network-settings.php:82
+msgid "Credits Display"
+msgstr ""
+
+#: admin/partials/network-settings.php:93
+msgid "Hide credits display on subsites"
+msgstr ""
+
+#: admin/partials/network-settings.php:96
+msgid "When enabled, the \"You have X credits available out of Y\" message will be hidden on all subsites."
+msgstr ""
+
+#: admin/partials/network-settings.php:103
+msgid "Save Network Settings"
+msgstr ""
+
+#: admin/partials/settings.php:66
+#: admin/js/admin.js:2410
+msgid "Dismiss"
+msgstr ""
+
+#: admin/partials/settings.php:72
+msgid "A11Y generates alt text and long descriptions so every visitor — including screen reader users — can experience your images. Complete the steps below to get started."
+msgstr ""
+
+#: admin/partials/settings.php:78
+msgid "Create your account"
+msgstr ""
+
+#: admin/partials/settings.php:81
+#, php-format
+msgid "Sign up for free at <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">a11y.so</a> to get your API key and access your image library."
+msgstr ""
+
+#: admin/partials/settings.php:89
+msgid "Connect your API key"
+msgstr ""
+
+#: admin/partials/settings.php:92
+#, php-format
+msgid "Paste your key from <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">Account &rarr; API Keys</a> into the field below and save."
+msgstr ""
+
+#: admin/partials/settings.php:100
+msgid "Generate alt text"
+msgstr ""
+
+#: admin/partials/settings.php:103
+#, php-format
+msgid "Use <a href=\"%s\">Bulk Generate</a> for existing images. New uploads are handled automatically."
+msgstr ""
+
+#: admin/partials/settings.php:114
+msgid "API not connected — "
+msgstr ""
+
+#: admin/partials/settings.php:115
+msgid "Mock Mode active."
+msgstr ""
+
+#: admin/partials/settings.php:116
+msgid "Any API key value works for testing. Dummy data will be returned."
+msgstr ""
+
+#: admin/partials/settings.php:145
+msgid "A11Y Settings"
+msgstr ""
+
+#: admin/partials/settings.php:152
+msgid "Network Settings Active:"
+msgstr ""
+
+#: admin/partials/settings.php:154
+msgid "All settings are controlled by the network administrator and cannot be changed on this site."
+msgstr ""
+
+#: admin/partials/settings.php:156
+msgid "The API key is shared across the network and cannot be changed on this site. Other settings can be configured locally."
+msgstr ""
+
+#: admin/partials/settings.php:178
+#: admin/partials/settings.php:186
+msgid "API Key"
+msgstr ""
+
+#: admin/partials/settings.php:217
+#, php-format
+msgid "Get your API Key at <a href=\"%s\" target=\"_blank\">A11Y &gt; Account &gt; API Keys</a>."
+msgstr ""
+
+#: admin/partials/settings.php:228
+#, php-format
+msgid "Your API key is invalid. Please check your API key or <a href=\"%s\" target=\"_blank\">create a new one</a>."
+msgstr ""
+
+#: admin/partials/settings.php:234
+msgid "Unable to verify your API key. Please check your connection and try again."
+msgstr ""
+
+#: admin/partials/settings.php:242
+#, php-format
+msgid "You're on the <strong>%s</strong> plan."
+msgstr ""
+
+#: admin/partials/settings.php:250
+#, php-format
+msgid "You have <strong>%d</strong> credits available out of <strong>%d</strong>."
+msgstr ""
+
+#: admin/partials/settings.php:263
+msgid "You can upgrade your plan to get more credits."
+msgstr ""
+
+#: admin/partials/settings.php:274
+msgid "Account"
+msgstr ""
+
+#: admin/partials/settings.php:278
+#, php-format
+msgid "<a href=\"%s\" target=\"_blank\">Manage your account</a> and additional settings on a11y.so."
+msgstr ""
+
+#: admin/partials/settings.php:299
+msgid "Generation Settings"
+msgstr ""
+
+#: admin/partials/settings.php:308
+msgid "Description Format"
+msgstr ""
+
+#: admin/partials/settings.php:329
+msgid "Complex format generates both an alt text and a long description linked via aria-describedby for screen readers."
+msgstr ""
+
+#: admin/partials/settings.php:337
+msgid "Alt Text Language"
+msgstr ""
+
+#: admin/partials/settings.php:354
+msgid "Also update:"
+msgstr ""
+
+#: admin/partials/settings.php:375
+msgid "New uploads:"
+msgstr ""
+
+#: admin/partials/settings.php:382
+msgid "Automatically generate alt text with A11Y."
+msgstr ""
+
+#: admin/partials/settings.php:385
+msgid "Note: You can always generate alt text using the Bulk Generate page or Update Alt Text button on an individual image."
+msgstr ""
+
+#: admin/partials/settings.php:403
+msgid "Filtering & Bulk Refreshing"
+msgstr ""
+
+#: admin/partials/settings.php:412
+msgid "Only process these file extensions:"
+msgstr ""
+
+#: admin/partials/settings.php:420
+msgid "Separate with commas. Leave blank to process all image types."
+msgstr ""
+
+#: admin/partials/settings.php:428
+msgid "Exclude these post types:"
+msgstr ""
+
+#: admin/partials/settings.php:436
+msgid "Separate with commas. Leave blank to process images from all post types."
+msgstr ""
+
+#: admin/partials/settings.php:442
+msgid "Bulk action behavior:"
+msgstr ""
+
+#: admin/partials/settings.php:473
+msgid "Technical Settings"
+msgstr ""
+
+#: admin/partials/settings.php:474
+msgid "Advanced settings — only modify these if needed."
+msgstr ""
+
+#: admin/partials/settings.php:482
+msgid "Miscellaneous"
+msgstr ""
+
+#: admin/partials/settings.php:489
+msgid "This site is reachable over the public internet."
+msgstr ""
+
+#: admin/partials/settings.php:492
+msgid "Check to allow A11Y to fetch your images via URLs. If this site is private, uncheck this box and images will be uploaded to A11Y instead."
+msgstr ""
+
+#: admin/partials/settings.php:500
+msgid "Do not show warning when out of credits."
+msgstr ""
+
+#: admin/partials/settings.php:510
+msgid "Request timeout:"
+msgstr ""
+
+#: admin/partials/settings.php:524
+msgid "seconds"
+msgstr ""
+
+#: admin/partials/settings.php:531
+msgid "Error Logs"
+msgstr ""
+
+#: admin/partials/settings.php:539
+msgid "Clear Logs"
+msgstr ""
+
+#: admin/partials/settings.php:554
+msgid "Save Changes"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:373
+msgid "Excluded post type in user settings."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:478
+msgid "User setting image filtering: Filetype not allowed."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:494
+msgid "Unsupported extension."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:510
+msgid "File not found."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:511
+msgid "(System Issue)"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:525
+msgid "File size exceeds 16MB limit."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:541
+msgid "Image dimensions too small."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1538
+msgid "Bulk generation complete! All remaining images have been processed."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1539
+msgid "All images already have alt text or are not eligible for processing."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1547
+#, php-format
+msgid "%d ineligible (size/format/settings)"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1550
+#, php-format
+msgid "%d API errors"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1553
+#, php-format
+msgid "%d generation failures"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1556
+#, php-format
+msgid "%d skipped by WPML language filter"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1560
+#, php-format
+msgid "Skip reasons: %s"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1662
+msgid "Images partially updated (no more credits)."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1675
+msgid "Unable to access image URLs. Your images may be on a private server."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1766
+#, php-format
+msgid "Batch processed: %d updated, %d skipped"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1768
+#, php-format
+msgid "Batch processed: %d updated"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1812
+#: includes/class-a11y-attachment.php:1970
+msgid "You do not have permission to manage attachments."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1817
+#: includes/class-a11y-attachment.php:1872
+#: includes/class-a11y-attachment.php:1946
+msgid "You do not have permission to edit this attachment."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1890
+msgid "Unable to access image URL. Your site may be on a private server."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1938
+msgid "Invalid request."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1954
+msgid "Alt text updated."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:1994
+msgid "Invalid post ID."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2001
+msgid "Image is not eligible for auto-generating ALT text."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2007
+msgid "Image is eligible for auto-generating ALT text."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2021
+#: includes/class-a11y-post.php:689
+msgid "&#8595; A11Y"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2155
+msgid "Security check failed. Please refresh the page and try again."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2189
+msgid "Invalid CSV file. Please make sure the file has the required columns."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2285
+msgid "[A11Y] No images were matched."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2289
+#, php-format
+msgid "[A11Y] Successfully imported alt text for %d image."
+msgid_plural "[A11Y] Successfully imported alt text for %d images."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-a11y-attachment.php:2318
+msgid "You do not have permission to upload files."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2328
+msgid "No file uploaded."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2337
+msgid "Please upload a CSV file."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2431
+msgid "Any alt text"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2432
+msgid "Without alt text"
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2574
+msgid "Invalid site."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2605
+msgid "Database query failed."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2614
+msgid "Site complete."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2648
+msgid "No more credits."
+msgstr ""
+
+#: includes/class-a11y-attachment.php:2671
+msgid "An unexpected error occurred."
+msgstr ""
+
+#: includes/class-a11y-post.php:112
+msgid "Populate alt text using values from your media library images. If missing, alt text will be generated for the product images and product description."
+msgstr ""
+
+#: includes/class-a11y-post.php:114
+msgid "Populate alt text using values from your media library images. If missing, alt text will be generated for each image and added to the post."
+msgstr ""
+
+#: includes/class-a11y-post.php:133
+msgid "Include images not in library"
+msgstr ""
+
+#: includes/class-a11y-post.php:142
+msgid "Add SEO keywords"
+msgstr ""
+
+#: includes/class-a11y-post.php:157
+msgid "Refreshing may take a while if many images are missing alt text. Please be patient during the refresh process."
+msgstr ""
+
+#: includes/class-a11y-post.php:162
+msgid "Refresh alt text with A11Y"
+msgstr ""
+
+#: includes/class-a11y-post.php:200
+msgid "[A11Y] No images were found to update."
+msgstr ""
+
+#: includes/class-a11y-post.php:239
+#: includes/class-a11y-post.php:504
+msgid "[A11Y] You have no more credits available. Go to your account on A11Y to get more credits."
+msgstr ""
+
+#: includes/class-a11y-post.php:242
+#: includes/class-a11y-post.php:306
+#: includes/class-a11y-post.php:507
+#: includes/class-a11y-post.php:735
+#, php-format
+msgid "[A11Y] Refreshed alt text for %d images (%d generated)."
+msgstr ""
+
+#: includes/class-a11y-post.php:289
+msgid "Post not found."
+msgstr ""
+
+#: includes/class-a11y-post.php:311
+msgid "[A11Y] Content is empty, no update needed."
+msgstr ""
+
+#: includes/class-a11y-post.php:690
+msgid "Refresh Alt Text"
+msgstr ""
+
+#: admin/js/admin.js:322
+#, js-format
+msgid "Continue: %d remaining images"
+msgstr ""
+
+#: admin/js/admin.js:395
+msgid "Previous bulk processing session found. The form has been restored to continue where you left off."
+msgstr ""
+
+#: admin/js/admin.js:399
+#, js-format
+msgid "Previous bulk processing session found from %d minutes ago. The form has been restored to continue where you left off."
+msgstr ""
+
+#: admin/js/admin.js:406
+#, js-format
+msgid " Processing will resume after image ID %d."
+msgstr ""
+
+#: admin/js/admin.js:519
+#, js-format
+msgid "Generate Alt Text for %d Images"
+msgstr ""
+
+#: admin/js/admin.js:568
+#: admin/js/admin.js:598
+msgid "Attachment ID is missing"
+msgstr ""
+
+#: admin/js/admin.js:675
+msgid "Processing images..."
+msgstr ""
+
+#: admin/js/admin.js:784
+msgid "Update complete!"
+msgstr ""
+
+#: admin/js/admin.js:935
+msgid "Server error - retrying in 2 seconds..."
+msgstr ""
+
+#: admin/js/admin.js:946
+msgid "Retrying bulk generation..."
+msgstr ""
+
+#: admin/js/admin.js:981
+msgid "Update stopped after multiple server errors. Your progress has been saved - you can restart to continue."
+msgstr ""
+
+#: admin/js/admin.js:985
+msgid "Update stopped due to an error. Your progress has been saved - you can restart to continue."
+msgstr ""
+
+#: admin/js/admin.js:993
+msgid "Bulk generation encountered an error. Your progress has been saved."
+msgstr ""
+
+#: admin/js/admin.js:1008
+msgid "Post ID is missing"
+msgstr ""
+
+#: admin/js/admin.js:1063
+msgid "Unable to update alt text for this image."
+msgstr ""
+
+#: admin/js/admin.js:1075
+msgid "An error occurred while updating the alt text."
+msgstr ""
+
+#: admin/js/admin.js:1118
+msgid "Invalid batch ID"
+msgstr ""
+
+#: admin/js/admin.js:1268
+#, js-format
+msgid "Resuming from where you left off - starting after image ID %d"
+msgstr ""
+
+#: admin/js/admin.js:1282
+#, js-format
+msgid "Continuing bulk generation from image ID %d..."
+msgstr ""
+
+#: admin/js/admin.js:1354
+msgid "[A11Y] Make sure to save any changes before proceeding -- any unsaved changes will be lost. Are you sure you want to continue?"
+msgstr ""
+
+#: admin/js/admin.js:1387
+msgid "This is not a valid post."
+msgstr ""
+
+#: admin/js/admin.js:1394
+msgid "Processing..."
+msgstr ""
+
+#: admin/js/admin.js:1408
+#: admin/js/admin.js:1754
+#: admin/js/admin.js:2310
+msgid "Unable to generate alt text. Check error logs for details."
+msgstr ""
+
+#: admin/js/admin.js:1416
+msgid "An error occurred."
+msgstr ""
+
+#: admin/js/admin.js:1642
+msgid "A11Y: Update alt text for this single image"
+msgstr ""
+
+#: admin/js/admin.js:1653
+#: admin/js/admin.js:2242
+msgid "Processing"
+msgstr ""
+
+#: admin/js/admin.js:1664
+msgid "Update Alt Text with A11Y"
+msgstr ""
+
+#: admin/js/admin.js:1669
+#: admin/js/admin.js:1769
+#: admin/js/admin.js:2325
+msgid "Update Alt Text"
+msgstr ""
+
+#: admin/js/admin.js:1747
+#: admin/js/admin.js:2303
+msgid "Updated"
+msgstr ""
+
+#: admin/js/admin.js:2119
+msgid "Detecting languages..."
+msgstr ""
+
+#: admin/js/admin.js:2359
+msgid "URL Access Error"
+msgstr ""
+
+#: admin/js/admin.js:2373
+msgid "Image Access Problem"
+msgstr ""
+
+#: admin/js/admin.js:2377
+msgid "Some of your image URLs are not accessible to our servers. This can happen due to:"
+msgstr ""
+
+#: admin/js/admin.js:2382
+msgid "Server firewalls or security restrictions"
+msgstr ""
+
+#: admin/js/admin.js:2386
+msgid "Local development environments (localhost)"
+msgstr ""
+
+#: admin/js/admin.js:2390
+msgid "Password-protected or staging sites"
+msgstr ""
+
+#: admin/js/admin.js:2394
+msgid "VPN or private network configurations"
+msgstr ""
+
+#: admin/js/admin.js:2399
+msgid "Switching to direct upload mode will send your images securely to our servers instead of using URLs, which resolves this issue."
+msgstr ""
+
+#: admin/js/admin.js:2407
+msgid "Update Setting Now"
+msgstr ""

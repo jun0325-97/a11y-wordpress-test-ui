@@ -23,32 +23,59 @@ class A11Y_API {
     }
 
     private function mock_response($attachment_id, $options) {
-        $filename = basename(get_attached_file($attachment_id));
-        $format = $options['format'] ?? get_option('a11y_format', 'auto');
+        $filename  = basename(get_attached_file($attachment_id));
+        $mock_type = get_option('a11y_mock_response_type', 'graphic');
 
-        $response = array(
-            'alt_text'    => sprintf('[A11Y 목업] %s 이미지에 대한 대체 텍스트', $filename),
-            'asset_id'    => 'mock-asset-' . $attachment_id,  // ← 이것도 필요
-            'type'        => 'simple',
-            'tokens_used' => 80,
-        );
+        // mock_type으로 모드 결정
+        $is_simple_mode   = ($mock_type === 'simple');
+        $is_complex_image = ($mock_type === 'complex');
 
-        if ($format === 'complex' || $format === 'auto') {
-            $response['alt_text']     = sprintf('[A11Y 목업] %s - 요약 설명', $filename);
-            $response['description']  = sprintf(
-                '[A11Y 목업] %s 이미지의 상세 설명입니다. 실제 API 연결 시 AI가 이미지를 분석하여 스크린리더 사용자를 위한 상세한 설명을 생성합니다.',
-                $filename
+        if ($is_simple_mode) {
+            return array(
+                'alt_text'    => sprintf('[목업-간소화] %s 이미지 설명', $filename),
+                'description' => null,
+                'img_type'    => null,
+                'lang_code'   => 'ko',
+                'llm_token'   => array(800),
+                'mode'        => '간소화',
+                'model'       => 'gpt-5.1',
+                'creidt'      => 1,
             );
-            $response['type']         = 'complex';
-            $response['tokens_used']  = 150;
         }
 
-        return $response;
+        if ($is_complex_image) {
+            return array(
+                'alt_text'    => sprintf('[목업-복합형] %s 행사 안내문', $filename),
+                'description' => '<h1>Mock Event Title</h1><p>Date: 2025-01-01</p><h2>Purpose</h2><p>This is a mock long description for a complex image. Screen readers will read this via aria-describedby.</p>',
+                'img_type'    => '복합형',
+                'lang_code'   => 'ko',
+                'llm_token'   => array(4446),
+                'mode'        => '웹접근성',
+                'model'       => 'gpt-5.1',
+                'creidt'      => 2,
+            );
+        }
+
+        // 기본: 그래픽형
+        return array(
+            'alt_text'    => sprintf('[목업-그래픽형] %s 이미지 설명', $filename),
+            'description' => null,
+            'img_type'    => '그래픽형',
+            'lang_code'   => 'ko',
+            'llm_token'   => array(3398),
+            'mode'        => '웹접근성',
+            'model'       => 'gpt-5.1',
+            'creidt'      => 1,
+        );
     }
 
     public function get_token_balance() {
         if ($this->is_mock_mode()) {
-            return array('remaining' => 9999, 'used' => 1, 'plan' => 'mock_trial');
+            return array(
+                'remaining' => 95,   // 실제 응답의 user count 기준
+                'used'      => 5,
+                'plan'      => 'mock_trial',
+            );
         }
         return false;
     }
@@ -65,3 +92,16 @@ class A11Y_API {
         return false;
     }
 }
+
+
+// 실제 API 연결 시 사용할 Request body 구조 (메모)
+// POST https://a11y.so/api/team_workspace/ai/request_one
+// {
+//   "sir_id":         (string) site image record id,
+//   "tw_id":          (string) team workspace id,
+//   "si_id":          (string) site image id,
+//   "twfu_id":        (string) team workspace file upload id,
+//   "is_simple_mode": (bool)   true = 간소화, false = 웹접근성 지침,
+//   "is_use_img_type":(bool)   img_type 분류 사용 여부,
+//   "img_type":       (string) 미분류 / 그래픽형 / 복합형 등
+// }

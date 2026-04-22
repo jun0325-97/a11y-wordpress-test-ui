@@ -65,6 +65,9 @@
       </div>
       <button id="a11y-welcome-close-btn" class="a11y-welcome-dismiss" aria-label="<?php esc_attr_e( 'Dismiss', 'a11y-alt-text' ); ?>">
         Dismiss
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
       </button>
     </div>
 
@@ -141,7 +144,9 @@
   </div>
   <?php endif; ?>
 
-  <h1 class="a11y-settings-heading"><?php esc_html_e( 'A11Y Settings', 'a11y-alt-text' ); ?></h1>
+  <div class="a11y-settings-form-header">
+    <h1 class="a11y-settings-heading"><?php esc_html_e( 'A11Y Settings', 'a11y-alt-text' ); ?></h1>
+  </div>
   <?php settings_errors(); ?>
 
   <?php if ( $settings_network_controlled || $api_key_locked ) : ?>
@@ -291,7 +296,6 @@
     <!-- ================================================================
          카드 2: Generation Settings
          Description Format + Language + 생성 시 동작 + 새 이미지 자동 생성
-         — "어떻게 만들 것인가"에 관한 설정 일체
          ================================================================ -->
     <div class="a11y-section-card">
       <div class="a11y-section-header">
@@ -396,7 +400,6 @@
 
     <!-- ================================================================
          카드 3: Filtering & Bulk Refreshing
-         Image Filtering + Bulk Refreshing — "어떤 이미지를 처리할 것인가"
          ================================================================ -->
     <div class="a11y-section-card">
       <div class="a11y-section-header">
@@ -438,18 +441,33 @@
               </td>
             </tr>
 
+            <!-- skip_filenotfound — 전역 처리 동작, Bulk 전용 아님 -->
+            <tr>
+              <th scope="row"><?php esc_html_e( 'Image availability:', 'a11y-alt-text' ); ?></th>
+              <td>
+                <div class="a11y-checkbox-row">
+                  <input type="checkbox" id="a11y_skip_filenotfound"
+                        name="a11y_skip_filenotfound" value="yes"
+                        <?php checked( 'yes', A11Y_Utility::get_setting( 'a11y_skip_filenotfound' ) ); ?>>
+                  <label for="a11y_skip_filenotfound" class="a11y-checkbox-label">
+                    <?php esc_html_e( 'Skip image files unable to be found on the server.', 'a11y-alt-text' ); ?>
+                  </label>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Bulk action behavior — Bulk Action 메뉴 전용 옵션만 묶음 -->
             <tr>
               <th scope="row"><?php esc_html_e( 'Bulk action behavior:', 'a11y-alt-text' ); ?></th>
               <td>
                 <?php foreach ( array(
-                  'a11y_skip_filenotfound'      => 'Skip image files unable to be found on the server.',
                   'a11y_bulk_refresh_overwrite' => 'Overwrite existing alt text when refreshing posts and pages using the Bulk Action menu.',
                   'a11y_bulk_refresh_external'  => 'Process external images when refreshing posts and pages using the Bulk Action menu.',
                 ) as $opt => $label ) : ?>
                   <div class="a11y-checkbox-row">
                     <input type="checkbox" id="<?php echo esc_attr( $opt ); ?>"
-                           name="<?php echo esc_attr( $opt ); ?>" value="yes"
-                           <?php checked( 'yes', A11Y_Utility::get_setting( $opt ) ); ?>>
+                          name="<?php echo esc_attr( $opt ); ?>" value="yes"
+                          <?php checked( 'yes', A11Y_Utility::get_setting( $opt ) ); ?>>
                     <label for="<?php echo esc_attr( $opt ); ?>" class="a11y-checkbox-label">
                       <?php echo esc_html( $label ); ?>
                     </label>
@@ -503,6 +521,39 @@
               </td>
             </tr>
 
+            <!-- Admin Menu Access — API Key 연결 후에만 표시 -->
+            <?php if ( $has_api_key && ! $settings_network_controlled ) : ?>
+            <tr>
+              <th scope="row">
+                <label for="a11y_admin_capability">
+                  <?php esc_html_e( 'Menu Access', 'a11y-alt-text' ); ?>
+                </label>
+              </th>
+              <td>
+                <?php
+                  $current_cap = A11Y_Utility::get_setting( 'a11y_admin_capability', 'manage_options' );
+                  $capabilities = array(
+                    'manage_options'    => __( 'Administrator only', 'a11y-alt-text' ),
+                    'edit_others_posts' => __( 'Editor and above', 'a11y-alt-text' ),
+                    'publish_posts'     => __( 'Author and above', 'a11y-alt-text' ),
+                    'read'              => __( 'All logged-in users', 'a11y-alt-text' ),
+                  );
+                ?>
+                <select id="a11y_admin_capability" name="a11y_admin_capability">
+                  <?php foreach ( $capabilities as $cap => $label ) : ?>
+                    <option value="<?php echo esc_attr( $cap ); ?>"
+                      <?php selected( $current_cap, $cap ); ?>>
+                      <?php echo esc_html( $label ); ?>
+                    </option>
+                  <?php endforeach; ?>
+                </select>
+                <p class="description">
+                  <?php esc_html_e( 'Control which user roles can access the A11Y admin menu.', 'a11y-alt-text' ); ?>
+                </p>
+              </td>
+            </tr>
+            <?php endif; ?>
+
             <!-- Timeout -->
             <tr>
               <th scope="row">
@@ -547,6 +598,28 @@
       </div>
     </div>
 
+    <div class="a11y-section-card" style="border-left: 3px solid #f59e0b;">
+      <div class="a11y-section-header">
+        <h2>🧪 Mock Mode — Test Controls</h2>
+      </div>
+      <div class="a11y-section-body">
+        <table class="form-table" role="presentation">
+          <tr>
+            <th scope="row">Mock Response Type</th>
+            <td>
+              <?php $mock_type = get_option('a11y_mock_response_type', 'graphic'); ?>
+              <select name="a11y_mock_response_type">
+                <option value="graphic" <?php selected($mock_type, 'graphic'); ?>>그래픽형 (description: null)</option>
+                <option value="complex" <?php selected($mock_type, 'complex'); ?>>복합형 (description: HTML)</option>
+                <option value="simple"  <?php selected($mock_type, 'simple');  ?>>간소화 모드</option>
+              </select>
+              <p class="description">실제 API 연결 전 각 응답 타입별 UI를 테스트합니다.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
 
     <!-- 저장 버튼 + 버전 표시 -->
     <div class="a11y-settings-footer">
@@ -558,6 +631,8 @@
 
   </form>
 </div>
+
+
 
 <?php if ( $settings_network_controlled ) : ?>
 <script>

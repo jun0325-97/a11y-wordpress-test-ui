@@ -582,6 +582,27 @@ class A11Y_Settings {
         'sanitize_callback' => array( $this, 'sanitize_admin_capability' )
       )
     );
+
+    register_setting(
+      'a11y-settings',
+      'a11y_admin_capability',
+      array(
+          'sanitize_callback' => array( $this, 'sanitize_admin_capability' ),
+          'default'           => 'manage_options',
+      )
+    );
+
+     // Mock Mode 테스트용 — 실제 API 연결 후 제거
+    register_setting(
+      'a11y-settings',
+      'a11y_mock_response_type',
+      array(
+        'sanitize_callback' => function( $val ) {
+          return in_array( $val, array( 'graphic', 'complex', 'simple' ), true ) ? $val : 'graphic';
+        },
+        'default' => 'graphic',
+      )
+    );
   }
 
   /**

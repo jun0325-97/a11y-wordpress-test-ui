@@ -67,9 +67,11 @@
    웰컴 패널 (API Key 미입력 시)
    ========================================================================== */
 .a11y-welcome-panel {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   margin-bottom: 20px;
-  padding: 20px 8px;
+  padding: 32px 28px;
   border-radius: 16px;
   border: 1px solid var(--a11y-gray-200);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -87,7 +89,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 20px 12px;
+  width: 100%;
+  /* padding: 14px 20px 12px; */
 }
 
 .a11y-welcome-header-left {
@@ -124,7 +127,7 @@
 
 /* 소개 문구 */
 .a11y-welcome-intro {
-  padding: 0 20px 16px;
+  margin-top: 12px;
 }
 .a11y-welcome-intro p {
   margin: 0;
@@ -137,7 +140,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  padding: 0 20px;
+  margin-top: 16px;
+  /* padding: 0 20px; */
 }
 
 @media (max-width: 782px) {
@@ -205,7 +209,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 16px 20px 20px;
+  margin-top: 16px;
+  /* margin: 16px 20px 20px; */
   padding: 8px 12px;
   background: rgba(255, 255, 255, 0.55);
   -webkit-backdrop-filter: blur(4px);
@@ -308,7 +313,7 @@
 }
 
 /* ==========================================================================
-   Form Table — WP 네이티브 form-table 위에 오버레이
+   Form Table
    ========================================================================== */
 .a11y-wrap .a11y-settings-heading {
   font-weight: 700;
@@ -427,7 +432,7 @@
 }
 
 /* ==========================================================================
-   버튼 — WP button-primary를 앨리 primary blue로 오버라이드
+   버튼 — 앨리 primary blue
    ========================================================================== */
 .a11y-settings-form .button-primary,
 #a11y-settings-form .button-primary {
@@ -451,7 +456,7 @@
 
 .a11y-wrap .button {
   font-weight: 600;
-  border-radius: 9px;
+  border-radius: 8px;
 }
 
 /* ==========================================================================
@@ -545,7 +550,7 @@
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 20px;
-  background: var(--a11y-gray-200); /* 카드 사이 구분선 역할 */
+  background: var(--a11y-gray-200);
 }
 
 @media (max-width: 1024px) {

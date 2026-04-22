@@ -259,12 +259,28 @@ class A11Y_Attachment {
     }
 
     $alt_text = $response['alt_text'];
-    // === 앨리 추가: description, type 저장 ===
+
+    // description은 HTML로 오므로 wp_kses로 허용 태그만 필터링
     if (!empty($response['description'])) {
-        update_post_meta($attachment_id, 'a11y_long_desc', sanitize_textarea_field($response['description']));
+        $allowed_tags = wp_kses_allowed_html('post');
+        update_post_meta(
+            $attachment_id,
+            'a11y_long_desc',
+            wp_kses($response['description'], $allowed_tags)
+        );
     }
-    if (!empty($response['type'])) {
-        update_post_meta($attachment_id, 'a11y_image_type', sanitize_text_field($response['type']));
+
+    // type 필드명이 img_type으로 변경됨
+    if (!empty($response['img_type'])) {
+        update_post_meta($attachment_id, 'a11y_image_type', sanitize_text_field($response['img_type']));
+    }
+
+    // 모드/모델 정보도 저장 (디버깅 및 향후 활용)
+    if (!empty($response['mode'])) {
+        update_post_meta($attachment_id, 'a11y_generation_mode', sanitize_text_field($response['mode']));
+    }
+    if (!empty($response['model'])) {
+        update_post_meta($attachment_id, 'a11y_model', sanitize_text_field($response['model']));
     }
     update_post_meta($attachment_id, 'a11y_generated_at', current_time('mysql'));
 
