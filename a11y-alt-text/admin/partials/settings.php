@@ -305,34 +305,69 @@
         <table class="form-table" role="presentation">
           <tbody>
 
-            <!-- Description Format — A11Y 전용 (simple/complex/auto) -->
-            <tr>
-              <th scope="row">
-                <label for="a11y_format"><?php esc_html_e( 'Description Format', 'a11y-alt-text' ); ?></label>
-              </th>
-              <td>
-                <select id="a11y_format" name="a11y_format" class="regular-text">
-                  <?php
-                    $current_format = get_option( 'a11y_format', 'auto' );
-                    $formats = array(
-                      'auto'    => 'Auto (API decides)',
-                      'simple'  => 'Simple — alt text only',
-                      'complex' => 'Complex — alt text + aria-describedby long description',
-                    );
-                    foreach ( $formats as $val => $label ) {
-                      $sel = ( $current_format === $val ) ? ' selected' : '';
-                      echo wp_kses(
-                        "<option value=\"$val\"$sel>$label</option>\n",
-                        array( 'option' => array( 'selected' => array(), 'value' => array() ) )
-                      );
-                    }
-                  ?>
-                </select>
-                <p class="description">
-                  <?php esc_html_e( 'Complex format generates both an alt text and a long description linked via aria-describedby for screen readers.', 'a11y-alt-text' ); ?>
-                </p>
-              </td>
-            </tr>
+      <!-- Generation Mode — 간소화 / 웹접근성 지침 -->
+      <tr>
+        <th scope="row">
+          <label><?php esc_html_e( 'Generation Mode', 'a11y-alt-text' ); ?></label>
+        </th>
+        <td>
+          <?php $current_mode = get_option( 'a11y_generation_mode', 'wcag' ); ?>
+
+          <div class="a11y-radio-card <?php echo $current_mode === 'wcag' ? 'is-selected' : ''; ?>"
+              id="a11y-mode-card-wcag">
+            <label class="a11y-radio-card-label">
+              <input type="radio" name="a11y_generation_mode" value="wcag"
+                    <?php checked( $current_mode, 'wcag' ); ?>>
+              <span class="a11y-radio-card-title">
+                <?php esc_html_e( '웹접근성 지침 모드', 'a11y-alt-text' ); ?>
+                <span class="a11y-badge-recommended"><?php esc_html_e( '권장', 'a11y-alt-text' ); ?></span>
+              </span>
+            </label>
+            <p class="a11y-radio-card-desc">
+              <?php esc_html_e( 'AI가 이미지 유형을 자동 분류하여 WCAG 2.2 기준에 맞는 결과물을 생성합니다.', 'a11y-alt-text' ); ?>
+            </p>
+            <ul class="a11y-radio-card-list">
+              <li><?php esc_html_e( '일반 이미지 → 간결한 alt 텍스트', 'a11y-alt-text' ); ?></li>
+              <li><?php esc_html_e( '복합 이미지(차트·인포그래픽 등) → alt + aria-describedby 상세 설명', 'a11y-alt-text' ); ?></li>
+              <li><?php esc_html_e( '장식 이미지 → alt="" (빈 값, 스크린 리더 스킵)', 'a11y-alt-text' ); ?></li>
+            </ul>
+          </div>
+
+          <div class="a11y-radio-card <?php echo $current_mode === 'simple' ? 'is-selected' : ''; ?>"
+              id="a11y-mode-card-simple">
+            <label class="a11y-radio-card-label">
+              <input type="radio" name="a11y_generation_mode" value="simple"
+                    <?php checked( $current_mode, 'simple' ); ?>>
+              <span class="a11y-radio-card-title">
+                <?php esc_html_e( '간소화 모드', 'a11y-alt-text' ); ?>
+              </span>
+            </label>
+            <p class="a11y-radio-card-desc">
+              <?php esc_html_e( '이미지 유형을 분류하지 않고, 모든 이미지에 간결한 alt 텍스트만 생성합니다.', 'a11y-alt-text' ); ?>
+            </p>
+          </div>
+
+
+
+          <script>
+          (function () {
+            document.querySelectorAll('.a11y-radio-card').forEach(function (card) {
+              // 카드 전체 클릭 시 내부 라디오 선택
+              card.addEventListener('click', function (e) {
+                var radio = this.querySelector('input[type="radio"]');
+                if (!radio) return;
+                radio.checked = true;
+                // is-selected 클래스 토글
+                document.querySelectorAll('.a11y-radio-card').forEach(function (c) {
+                  c.classList.remove('is-selected');
+                });
+                this.classList.add('is-selected');
+              });
+            });
+          })();
+          </script>
+        </td>
+      </tr>
 
             <!-- Alt Text Language -->
             <tr>
@@ -609,11 +644,12 @@
             <td>
               <?php $mock_type = get_option('a11y_mock_response_type', 'graphic'); ?>
               <select name="a11y_mock_response_type">
-                <option value="graphic" <?php selected($mock_type, 'graphic'); ?>>그래픽형 (description: null)</option>
-                <option value="complex" <?php selected($mock_type, 'complex'); ?>>복합형 (description: HTML)</option>
-                <option value="simple"  <?php selected($mock_type, 'simple');  ?>>간소화 모드</option>
+                <option value="simple"  <?php selected($mock_type, 'simple');  ?>>간소화 모드 — alt만 반환</option>
+                <option value="graphic" <?php selected($mock_type, 'graphic'); ?>>웹접근성 지침: 일반 이미지 — alt만 반환</option>
+                <option value="complex" <?php selected($mock_type, 'complex'); ?>>웹접근성 지침: 복합 이미지 — alt + 상세설명 반환</option>
+                <option value="decorative" <?php selected($mock_type, 'decorative'); ?>>웹접근성 지침: 장식 이미지 — alt="" 반환</option>
               </select>
-              <p class="description">실제 API 연결 전 각 응답 타입별 UI를 테스트합니다.</p>
+              <p class="description">실제 API 연결 전 각 시나리오별 UI를 테스트합니다. 이미지 유형 분류는 내부 처리되며 사용자에게 노출되지 않습니다.</p>
             </td>
           </tr>
         </table>

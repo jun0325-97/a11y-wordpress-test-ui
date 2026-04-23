@@ -26,11 +26,8 @@ class A11Y_API {
         $filename  = basename(get_attached_file($attachment_id));
         $mock_type = get_option('a11y_mock_response_type', 'graphic');
 
-        // mock_type으로 모드 결정
-        $is_simple_mode   = ($mock_type === 'simple');
-        $is_complex_image = ($mock_type === 'complex');
-
-        if ($is_simple_mode) {
+        // 간소화 모드 — 유형 분류 없음, alt만
+        if ( $mock_type === 'simple' ) {
             return array(
                 'alt_text'    => sprintf('[목업-간소화] %s 이미지 설명', $filename),
                 'description' => null,
@@ -43,10 +40,11 @@ class A11Y_API {
             );
         }
 
-        if ($is_complex_image) {
+        // 웹접근성 지침 모드 — 복합 이미지 (alt + aria-describedby)
+        if ( $mock_type === 'complex' ) {
             return array(
                 'alt_text'    => sprintf('[목업-복합형] %s 행사 안내문', $filename),
-                'description' => '<h1>Mock Event Title</h1><p>Date: 2025-01-01</p><h2>Purpose</h2><p>This is a mock long description for a complex image. Screen readers will read this via aria-describedby.</p>',
+                'description' => '<h1>Mock Event Title</h1><p>Date: 2026-01-01</p><h2>Purpose</h2><p>This is a mock long description for a complex image. Screen readers will read this via aria-describedby.</p>',
                 'img_type'    => '복합형',
                 'lang_code'   => 'ko',
                 'llm_token'   => array(4446),
@@ -56,9 +54,23 @@ class A11Y_API {
             );
         }
 
-        // 기본: 그래픽형
+        // 웹접근성 지침 모드 — 장식 이미지 (alt 빈값)
+        if ( $mock_type === 'decorative' ) {
+            return array(
+                'alt_text'    => '',
+                'description' => null,
+                'img_type'    => '장식형',
+                'lang_code'   => 'ko',
+                'llm_token'   => array(500),
+                'mode'        => '웹접근성',
+                'model'       => 'gpt-5.1',
+                'creidt'      => 1,
+            );
+        }
+
+        // 웹접근성 지침 모드 — 일반 이미지 (alt만)
         return array(
-            'alt_text'    => sprintf('[목업-그래픽형] %s 이미지 설명', $filename),
+            'alt_text'    => sprintf('[목업-일반형] %s 이미지 설명', $filename),
             'description' => null,
             'img_type'    => '그래픽형',
             'lang_code'   => 'ko',
