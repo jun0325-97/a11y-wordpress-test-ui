@@ -198,10 +198,11 @@ class A11Y {
     $this->loader->add_action( 'plugins_loaded', $database, 'check_database_schema' );
 
     // Admin
-		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
-		$this->loader->add_filter( 'plugin_row_meta', $admin, 'modify_plugin_row_meta', 10, 4 );
+	$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
+	$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
+	$this->loader->add_filter( 'plugin_row_meta', $admin, 'modify_plugin_row_meta', 10, 4 );
     $this->loader->add_action( 'admin_notices', $admin, 'display_setup_notice' );
+	$this->loader->add_action( 'init', $admin, 'register_attachment_meta' );
 
     // Settings
     $this->loader->add_action( 'admin_menu', $settings, 'register_settings_pages' );

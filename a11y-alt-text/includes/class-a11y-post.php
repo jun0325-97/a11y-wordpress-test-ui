@@ -133,23 +133,6 @@ class A11Y_Post {
       <label for="a11y-generate-button-process-external-checkbox"><?php esc_html_e( 'Include images not in library', 'a11y-alt-text' ); ?></label>
     </div>
 
-    <div class="mt-1">
-      <input
-        type="checkbox"
-        id="a11y-generate-button-keywords-checkbox"
-        data-post-bulk-generate-keywords-checkbox
-      >
-      <label for="a11y-generate-button-keywords-checkbox"><?php esc_html_e( 'Add SEO keywords', 'a11y-alt-text' ); ?></label>
-
-      <input
-        type="text"
-        class="hidden mt-1 w-full placeholder:text-gray-400"
-        data-post-bulk-generate-keywords
-        placeholder="keyword1, keyword2"
-        maxlength="512"
-      >
-    </div>
-
     <div id="a11y-post-generate-button">
       <a
         href="<?php echo esc_url($button_href); ?>"

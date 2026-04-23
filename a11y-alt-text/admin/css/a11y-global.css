@@ -8,25 +8,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.a11y-generate-button__keywords-checkbox,
-#a11y-generate-button-overwrite-checkbox,
-#a11y-generate-button-process-external-checkbox,
-#a11y-generate-button-keywords-checkbox {
-  margin-top: 0 !important;
-}
-
-.a11y-generate-button__keywords-checkbox-wrapper {
-  margin: 0.5rem 0 0.25rem;
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  color: rgb(17, 24, 39);
-}
-
-.a11y-generate-button__keywords-textfield-wrapper input {
-  max-width: 100% !important;
-}
-
 .a11y-generate-button a,
 #a11y-post-generate-button a {
   display: inline-flex !important;
@@ -90,7 +71,7 @@ button.a11y-hidden {
 
 .a11y-generate-button img,
 #a11y-post-generate-button img {
-  width: 1.75rem;
+  width: 1.25rem;
 }
 
 .a11y-generate-button .disabled,
@@ -290,5 +271,37 @@ button.a11y-hidden {
   50% {
     transform: scale(1.02);
     opacity: 0.9;
+  }
+}
+
+/* ==========================================================================
+   Attachment Details — compat-attachment-fields 모바일 대응
+   ========================================================================== */
+@media (max-width: 782px) {
+  .compat-item .compat-attachment-fields tr {
+    display: block;
+  }
+
+  .compat-item .compat-attachment-fields th,
+  .compat-item .compat-attachment-fields td {
+    display: block;
+    width: 100%;
+    padding: 4px 0;
+  }
+
+  .compat-item .compat-attachment-fields th {
+    padding-bottom: 2px;
+    font-weight: 600;
+    height: 22px;
+  }
+
+  .compat-item .compat-attachment-fields td textarea,
+  .compat-item .compat-attachment-fields td input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .compat-item .compat-attachment-fields label span {
+    text-align: left;
   }
 }

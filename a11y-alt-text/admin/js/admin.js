@@ -1539,64 +1539,6 @@
     anchor.className =
       "button-secondary button-large a11y-generate-button__anchor";
 
-    // Create checkbox wrapper
-    const keywordsCheckboxWrapper = document.createElement("div");
-    keywordsCheckboxWrapper.setAttribute("id", buttonId + "-checkbox-wrapper");
-    keywordsCheckboxWrapper.classList.add(
-      "a11y-generate-button__keywords-checkbox-wrapper"
-    );
-
-    // Create checkbox
-    const keywordsCheckbox = document.createElement("input");
-    keywordsCheckbox.setAttribute("type", "checkbox");
-    keywordsCheckbox.setAttribute("id", buttonId + "-keywords-checkbox");
-    keywordsCheckbox.setAttribute(
-      "name",
-      "a11y-generate-button-keywords-checkbox"
-    );
-    keywordsCheckbox.className = "a11y-generate-button__keywords-checkbox";
-
-    // Create label for checkbox
-    const keywordsCheckboxLabel = document.createElement("label");
-    keywordsCheckboxLabel.htmlFor = "a11y-generate-button-keywords-checkbox";
-    keywordsCheckboxLabel.innerText = "Add SEO keywords";
-
-    // Create text field wrapper
-    const keywordsTextFieldWrapper = document.createElement("div");
-    keywordsTextFieldWrapper.setAttribute(
-      "id",
-      buttonId + "-textfield-wrapper"
-    );
-    keywordsTextFieldWrapper.className =
-      "a11y-generate-button__keywords-textfield-wrapper";
-    keywordsTextFieldWrapper.style.display = "none";
-
-    // Create text field
-    const keywordsTextField = document.createElement("input");
-    keywordsTextField.setAttribute("type", "text");
-    keywordsTextField.setAttribute("id", buttonId + "-textfield");
-    keywordsTextField.className = "a11y-generate-button__keywords-textfield";
-    keywordsTextField.setAttribute("name", "a11y-generate-button-keywords");
-    keywordsTextField.size = 40;
-
-    // Append checkbox and label to its wrapper
-    keywordsCheckboxWrapper.appendChild(keywordsCheckbox);
-    keywordsCheckboxWrapper.appendChild(keywordsCheckboxLabel);
-
-    // Append text field to its wrapper
-    keywordsTextFieldWrapper.appendChild(keywordsTextField);
-
-    // Event listener to show/hide text field on checkbox change
-    keywordsCheckbox.addEventListener("change", function () {
-      if (this.checked) {
-        keywordsTextFieldWrapper.style.display = "block";
-        keywordsTextField.setSelectionRange(0, 0);
-        keywordsTextField.focus();
-      } else {
-        keywordsTextFieldWrapper.style.display = "none";
-      }
-    });
-
     // Check if the attachment is eligible for generation
     const isAttachmentEligible = (attachmentId) => {
       jQuery.ajax({
@@ -1611,20 +1553,11 @@
         success: function (response) {
           if (response.status !== "success") {
             const tempAnchor = document.querySelector(`#${buttonId}-anchor`);
-            const tempCheckbox = document.querySelector(
-              `#${buttonId}-keywords-checkbox`
-            );
 
             if (tempAnchor) {
               tempAnchor.classList.add("disabled");
             } else {
               anchor.classList.add("disabled");
-            }
-
-            if (tempCheckbox) {
-              tempCheckbox.classList.add("disabled");
-            } else {
-              keywordsCheckbox.classList.add("disabled");
             }
           }
         },
@@ -1661,20 +1594,16 @@
     // Button icon
     const img = document.createElement("img");
     img.src = wp_a11y.icon_button_generate;
-    img.alt = __("Update Alt Text with A11Y", "a11y-alt-text");
+    img.alt = __("Generate Alt Text with A11Y", "a11y-alt-text");
     anchor.appendChild(img);
 
     // Button label/text
     const span = document.createElement("span");
-    span.innerText = __("Update Alt Text", "a11y-alt-text");
+    span.innerText = __("Generate Alt Text", "a11y-alt-text");
     anchor.appendChild(span);
 
     // Append anchor to the button
     button.appendChild(anchor);
-
-    // Append checkbox and text field wrappers to the button
-    button.appendChild(keywordsCheckboxWrapper);
-    button.appendChild(keywordsTextFieldWrapper);
 
     // Notice element below the button,
     // to display "Updated" message when action is successful
@@ -1707,9 +1636,7 @@
         context == "single"
           ? document.getElementById("attachment_alt")
           : document.querySelector('[data-setting="alt"] textarea');
-      const keywords = keywordsCheckbox.checked
-        ? extractKeywords(keywordsTextField.value)
-        : [];
+      const keywords = "";
 
       // Hide notice
       if (updateNotice) {
@@ -1744,6 +1671,37 @@
           descriptionEl.value = response.alt_text;
         }
 
+        // A11Y Description 실시간 반영
+        if (response.description != null) {
+          const a11yDescEl =
+            context == "single"
+              ? document.getElementById("attachment_a11y_description")
+              : document.querySelector(
+                  '[data-setting="a11y_description"] textarea'
+                );
+          if (a11yDescEl) {
+            a11yDescEl.value = response.description;
+            a11yDescEl.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+        }
+
+        // A11Y 이미지 유형 뱃지 실시간 반영
+        if (response.img_type) {
+          const typeBadge =
+            context == "single"
+              ? document.querySelector(".a11y-type-badge")
+              : document.querySelector(".attachment-details .a11y-type-badge");
+          if (typeBadge) {
+            typeBadge.textContent = response.img_type;
+            typeBadge.className = "a11y-type-badge";
+            if (response.img_type === "복합형") {
+              typeBadge.classList.add("a11y-type-complex");
+            } else {
+              typeBadge.classList.add("a11y-type-simple");
+            }
+          }
+        }
+
         updateNotice.innerText = __("Updated", "a11y-alt-text");
         updateNotice.classList.add("a11y-update-notice--success");
 
@@ -1767,7 +1725,7 @@
       // Reset button
       anchor.classList.remove("disabled", "a11y-processing");
       anchor.querySelector("span").innerHTML = __(
-        "Update Alt Text",
+        "Generate Alt Text",
         "a11y-alt-text"
       );
     });
@@ -2222,12 +2180,6 @@
         const anchor = event.currentTarget;
         const attachmentDetails = anchor.closest(".attachment-details");
         const generateButton = anchor.closest(".a11y-generate-button");
-        const keywordsCheckbox = generateButton.querySelector(
-          ".a11y-generate-button__keywords-checkbox"
-        );
-        const keywordsTextField = generateButton.querySelector(
-          ".a11y-generate-button__keywords-textfield"
-        );
         const updateNotice = generateButton.querySelector(
           ".a11y-update-notice"
         );
@@ -2298,6 +2250,32 @@
           if (wp_a11y.should_update_description === "yes") {
             descriptionEl.value = response.alt_text;
             descriptionEl.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+
+          // A11Y Description 실시간 반영
+          if (response.description != null) {
+            const a11yDescEl = attachmentDetails.querySelector(
+              '[data-setting="a11y_description"] textarea'
+            );
+            if (a11yDescEl) {
+              a11yDescEl.value = response.description;
+              a11yDescEl.dispatchEvent(new Event("change", { bubbles: true }));
+            }
+          }
+
+          // A11Y 이미지 유형 뱃지 실시간 반영
+          if (response.img_type) {
+            const typeBadge =
+              attachmentDetails.querySelector(".a11y-type-badge");
+            if (typeBadge) {
+              typeBadge.textContent = response.img_type;
+              typeBadge.className = "a11y-type-badge";
+              if (response.img_type === "복합형") {
+                typeBadge.classList.add("a11y-type-complex");
+              } else {
+                typeBadge.classList.add("a11y-type-simple");
+              }
+            }
           }
 
           updateNotice.innerText = __("Updated", "a11y-alt-text");

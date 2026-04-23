@@ -88,6 +88,18 @@ class A11Y_Admin {
       'settings_page_url'                       => admin_url( 'admin.php?page=a11y' ),
     ) );
     wp_set_script_translations( $this->plugin_name, 'a11y-alt-text' );
+
+    // 블록 에디터(구텐베르크)에서만 로드
+    if ( function_exists( 'get_current_screen' ) ) {
+        wp_enqueue_script(
+            'a11y-block-editor',
+            plugin_dir_url( __FILE__ ) . 'js/block-editor.js',
+            array( 'wp-blocks', 'wp-block-editor', 'wp-components', 'wp-data', 'wp-element', 'wp-hooks', 'wp-compose', 'wp-plugins', 'wp-i18n' ),
+            $this->version,
+            true
+        );
+        wp_set_script_translations( 'a11y-block-editor', 'a11y-alt-text' );
+    }
 	}
 
   /**
@@ -135,5 +147,22 @@ class A11Y_Admin {
     );
 
     echo '</p></div>';
+  }
+
+  /**
+   * 블록 에디터에서 a11y_description 메타를 읽고 쓸 수 있도록 REST API에 노출.
+   *
+   * @since 0.1.0
+   */
+  public function register_attachment_meta() {
+      register_post_meta( 'attachment', 'a11y_description', array(
+          'show_in_rest'  => true,
+          'single'        => true,
+          'type'          => 'string',
+          'auth_callback' => function () {
+              return current_user_can( 'upload_files' );
+          },
+          'sanitize_callback' => 'sanitize_textarea_field',
+      ) );
   }
 }

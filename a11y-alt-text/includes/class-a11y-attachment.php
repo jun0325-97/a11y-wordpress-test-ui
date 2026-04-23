@@ -265,7 +265,7 @@ class A11Y_Attachment {
         $allowed_tags = wp_kses_allowed_html('post');
         update_post_meta(
             $attachment_id,
-            'a11y_long_desc',
+            'a11y_description',
             wp_kses($response['description'], $allowed_tags)
         );
     }
@@ -1921,10 +1921,12 @@ SQL;
       ) );
 
       wp_send_json( array(
-        'status'           => 'success',
-        'alt_text'         => $response,
-        'wpml_success'     => $wpml_results['success'],
-        'polylang_success' => $polylang_results['success'],
+          'status'           => 'success',
+          'alt_text'         => $response,
+          'description'      => get_post_meta( $attachment_id, 'a11y_description', true ),
+          'img_type'         => get_post_meta( $attachment_id, 'a11y_image_type', true ),
+          'wpml_success'     => $wpml_results['success'],
+          'polylang_success' => $polylang_results['success'],
       ) );
     }
 
@@ -2700,16 +2702,9 @@ SQL;
 }
 
 
-  add_filter('attachment_fields_to_edit', 'a11y_add_attachment_fields', 10, 2);
+    add_filter('attachment_fields_to_edit', 'a11y_add_attachment_fields', 10, 2);
     function a11y_add_attachment_fields($form_fields, $post) {
-        $description = get_post_meta($post->ID, 'a11y_long_desc', true);
-        $form_fields['a11y_long_desc'] = array(
-            'label' => 'A11Y Description',
-            'input' => 'textarea',
-            'value' => $description,
-            'helps' => '스크린리더용 상세 설명 (aria-describedby로 연결됩니다)',
-        );
-
+        // ✅ 이미지 유형을 먼저 추가 (Required fields 안내문 위에 표시됨)
         $type = get_post_meta($post->ID, 'a11y_image_type', true);
         if ($type) {
             $type_labels = array(
@@ -2720,18 +2715,28 @@ SQL;
                 'label' => 'A11Y 이미지 유형',
                 'input' => 'html',
                 'html'  => sprintf(
-                    '<span style="background:#e8e0f4;color:#534AB7;padding:2px 8px;border-radius:4px;font-size:12px;">%s</span>',
+                    '<span style="margin-top: 5px; display: inline-block;background:#e8e0f4;color:#534AB7;padding:2px 8px;border-radius:4px;font-size:12px;">%s</span>',
                     esc_html($type_labels[$type] ?? $type)
                 ),
             );
         }
+
+        // ✅ Description은 그 다음에 추가
+        $description = get_post_meta($post->ID, 'a11y_description', true);
+        $form_fields['a11y_description'] = array(
+            'label' => 'A11Y Description',
+            'input' => 'textarea',
+            'value' => $description,
+            'helps' => '스크린리더용 상세 설명 (aria-describedby로 연결됩니다)',
+        );
+
         return $form_fields;
     }
 
     add_filter('attachment_fields_to_save', 'a11y_save_attachment_fields', 10, 2);
     function a11y_save_attachment_fields($post, $attachment) {
-        if (isset($attachment['a11y_long_desc'])) {
-            update_post_meta($post['ID'], 'a11y_long_desc', sanitize_textarea_field($attachment['a11y_long_desc']));
+        if (isset($attachment['a11y_description'])) {
+            update_post_meta($post['ID'], 'a11y_description', sanitize_textarea_field($attachment['a11y_description']));
         }
         return $post;
     }
