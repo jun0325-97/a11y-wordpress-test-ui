@@ -1,5 +1,5 @@
 (function () {
-  "use strict";
+  ("use strict");
   const { __ } = wp.i18n;
   window.a11y = window.a11y || {
     postsPerPage: 1,
@@ -1379,9 +1379,7 @@
     const keywordsTextField = document.querySelector(
       "[data-post-bulk-generate-keywords]"
     );
-    const keywords = keywordsCheckbox?.checked
-      ? extractKeywords(keywordsTextField?.value)
-      : [];
+    const keywords = [];
 
     if (!postId) {
       updateNotice.innerText = __("This is not a valid post.", "a11y-alt-text");
@@ -1569,7 +1567,6 @@
       isAttachmentEligible(attachmentId);
     } else {
       anchor.classList.add("disabled");
-      keywordsCheckbox.disabled = true;
     }
 
     anchor.title = __(
@@ -1636,7 +1633,7 @@
         context == "single"
           ? document.getElementById("attachment_alt")
           : document.querySelector('[data-setting="alt"] textarea');
-      const keywords = "";
+      const keywords = [];
 
       // Hide notice
       if (updateNotice) {
@@ -1653,9 +1650,11 @@
       // Update alt text in DOM
       if (response.status === "success") {
         altTextEl.value = response.alt_text;
+        altTextEl.dispatchEvent(new Event("change", { bubbles: true }));
 
         if (wp_a11y.should_update_title === "yes") {
           titleEl.value = response.alt_text;
+          titleEl.dispatchEvent(new Event("change", { bubbles: true }));
 
           if (context == "single") {
             // Add class to label to hide it; initially it behaves as placeholder
@@ -1665,42 +1664,16 @@
 
         if (wp_a11y.should_update_caption === "yes") {
           captionEl.value = response.alt_text;
+          captionEl.dispatchEvent(new Event("change", { bubbles: true }));
         }
 
         if (wp_a11y.should_update_description === "yes") {
           descriptionEl.value = response.alt_text;
+          descriptionEl.dispatchEvent(new Event("change", { bubbles: true }));
         }
 
-        // A11Y Description 실시간 반영
-        if (response.description != null) {
-          const a11yDescEl =
-            context == "single"
-              ? document.getElementById("attachment_a11y_description")
-              : document.querySelector(
-                  '[data-setting="a11y_description"] textarea'
-                );
-          if (a11yDescEl) {
-            a11yDescEl.value = response.description;
-            a11yDescEl.dispatchEvent(new Event("change", { bubbles: true }));
-          }
-        }
-
-        // A11Y 이미지 유형 뱃지 실시간 반영
-        if (response.img_type) {
-          const typeBadge =
-            context == "single"
-              ? document.querySelector(".a11y-type-badge")
-              : document.querySelector(".attachment-details .a11y-type-badge");
-          if (typeBadge) {
-            typeBadge.textContent = response.img_type;
-            typeBadge.className = "a11y-type-badge";
-            if (response.img_type === "복합형") {
-              typeBadge.classList.add("a11y-type-complex");
-            } else {
-              typeBadge.classList.add("a11y-type-simple");
-            }
-          }
-        }
+        // A11Y Description + 이미지 유형 실시간 반영
+        updateA11yFields(button, response);
 
         updateNotice.innerText = __("Updated", "a11y-alt-text");
         updateNotice.classList.add("a11y-update-notice--success");
@@ -1731,6 +1704,83 @@
     });
 
     return button;
+  }
+
+  /**
+   * AJAX 성공 후 A11Y Description과 이미지 유형 뱃지를 실시간 반영.
+   * - post.php (single): DOM에 실제 필드가 있으므로 querySelector로 찾아서 값 반영
+   * - upload.php (modal): attachment_fields_to_edit 필드가 Backbone 뷰 밖이라
+   *   DOM에 없으므로, 버튼 wrapper 안에 직접 생성/업데이트
+   *
+   * @param {HTMLElement} buttonEl - .a11y-generate-button div
+   * @param {Object}      response - AJAX 응답 { description, img_type }
+   */
+  function updateA11yFields(buttonEl, response) {
+    // ── 1. A11Y Description ──────────────────────────────────────────────
+    if (response.description != null) {
+      // post.php 상세 편집 페이지: PHP가 렌더링한 textarea가 DOM에 있음
+      const descEl =
+        document.querySelector('textarea[name*="[a11y_description]"]') ||
+        document.querySelector('[data-setting="a11y_description"] textarea');
+
+      if (descEl) {
+        // post.php: 기존 textarea에 값 반영
+        descEl.value = response.description;
+        descEl.dispatchEvent(new Event("change", { bubbles: true }));
+      } else {
+        // upload.php 모달: DOM에 없으므로 버튼 아래 프리뷰 박스 생성/업데이트
+        let previewBox = buttonEl.querySelector(".a11y-desc-preview");
+        if (!previewBox) {
+          previewBox = document.createElement("div");
+          previewBox.className = "a11y-desc-preview";
+          previewBox.style.cssText =
+            "margin-top:8px;padding:8px 10px;" +
+            "background:#f0eeff;border:1px solid #c4b8f5;" +
+            "border-radius:6px;font-size:11px;color:#374151;line-height:1.5;";
+
+          const previewLabel = document.createElement("span");
+          previewLabel.style.cssText =
+            "font-weight:600;display:block;margin-bottom:4px;" +
+            "font-size:11px;color:#534AB7;text-transform:uppercase;letter-spacing:0.03em;";
+          previewLabel.textContent = "A11Y Description";
+
+          const previewContent = document.createElement("div");
+          previewContent.className = "a11y-desc-preview-content";
+
+          previewBox.appendChild(previewLabel);
+          previewBox.appendChild(previewContent);
+          buttonEl.appendChild(previewBox);
+        }
+        previewBox.querySelector(".a11y-desc-preview-content").innerHTML =
+          response.description;
+      }
+    }
+
+    // ── 2. 이미지 유형 뱃지
+    if (response.img_type) {
+      const badgeClass =
+        response.img_type === "복합형"
+          ? "a11y-type-complex"
+          : "a11y-type-simple";
+
+      // post.php: PHP가 렌더링한 뱃지가 DOM에 있을 수 있음
+      let badge = document.querySelector(".a11y-type-badge");
+
+      if (badge) {
+        badge.textContent = response.img_type;
+        badge.className = "a11y-type-badge " + badgeClass;
+      } else {
+        // upload.php 모달: 버튼 안에 뱃지 생성/업데이트
+        let inlineBadge = buttonEl.querySelector(".a11y-type-badge");
+        if (!inlineBadge) {
+          inlineBadge = document.createElement("span");
+          inlineBadge.style.cssText = "display:inline-block;margin-top:6px;";
+          buttonEl.appendChild(inlineBadge);
+        }
+        inlineBadge.className = "a11y-type-badge " + badgeClass;
+        inlineBadge.textContent = response.img_type;
+      }
+    }
   }
 
   // Utility function to DRY up button injection logic
@@ -2159,21 +2209,6 @@
   function extendMediaTemplate() {
     const previousAttachmentDetails = wp.media.view.Attachment.Details;
     wp.media.view.Attachment.Details = previousAttachmentDetails.extend({
-      A11YCheckboxToggle: function (event) {
-        const target = event.currentTarget;
-        const keywordsTextFieldWrapper = target.parentNode.nextElementSibling;
-        const keywordsTextField = keywordsTextFieldWrapper.querySelector(
-          ".a11y-generate-button__keywords-textfield"
-        );
-
-        if (target.checked) {
-          keywordsTextFieldWrapper.style.display = "block";
-          keywordsTextField.setSelectionRange(0, 0);
-          keywordsTextField.focus();
-        } else {
-          keywordsTextFieldWrapper.style.display = "none";
-        }
-      },
       A11YAnchorClick: async function (event) {
         event.preventDefault();
         const attachmentId = this.model.id;
@@ -2216,9 +2251,7 @@
         const altTextEl = attachmentDetails.querySelector(
           '[data-setting="alt"] textarea'
         );
-        const keywords = keywordsCheckbox.checked
-          ? extractKeywords(keywordsTextField.value)
-          : [];
+        const keywords = [];
 
         // Hide notice
         if (updateNotice) {
@@ -2234,6 +2267,11 @@
 
         // Update alt text in DOM
         if (response.status === "success") {
+          // A11Y Description + 이미지 유형을 먼저 반영
+          // altTextEl.dispatchEvent가 Backbone 리렌더를 유발하기 전에 처리해야
+          // save-complete 사이클 동안 값이 안전하게 들어감
+          updateA11yFields(generateButton, response);
+
           altTextEl.value = response.alt_text;
           altTextEl.dispatchEvent(new Event("change", { bubbles: true }));
 
@@ -2252,31 +2290,8 @@
             descriptionEl.dispatchEvent(new Event("change", { bubbles: true }));
           }
 
-          // A11Y Description 실시간 반영
-          if (response.description != null) {
-            const a11yDescEl = attachmentDetails.querySelector(
-              '[data-setting="a11y_description"] textarea'
-            );
-            if (a11yDescEl) {
-              a11yDescEl.value = response.description;
-              a11yDescEl.dispatchEvent(new Event("change", { bubbles: true }));
-            }
-          }
-
-          // A11Y 이미지 유형 뱃지 실시간 반영
-          if (response.img_type) {
-            const typeBadge =
-              attachmentDetails.querySelector(".a11y-type-badge");
-            if (typeBadge) {
-              typeBadge.textContent = response.img_type;
-              typeBadge.className = "a11y-type-badge";
-              if (response.img_type === "복합형") {
-                typeBadge.classList.add("a11y-type-complex");
-              } else {
-                typeBadge.classList.add("a11y-type-simple");
-              }
-            }
-          }
+          // A11Y Description + 이미지 유형 실시간 반영
+          updateA11yFields(generateButton, response);
 
           updateNotice.innerText = __("Updated", "a11y-alt-text");
           updateNotice.classList.add("a11y-update-notice--success");
@@ -2304,7 +2319,6 @@
       },
       events: {
         ...previousAttachmentDetails.prototype.events,
-        "change .a11y-generate-button__keywords-checkbox": "A11YCheckboxToggle",
         "click .a11y-generate-button__anchor": "A11YAnchorClick",
       },
       template: function (view) {

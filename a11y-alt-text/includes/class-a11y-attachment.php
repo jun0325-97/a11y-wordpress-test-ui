@@ -2724,10 +2724,11 @@ SQL;
         // ✅ Description은 그 다음에 추가
         $description = get_post_meta($post->ID, 'a11y_description', true);
         $form_fields['a11y_description'] = array(
-            'label' => 'A11Y Description',
-            'input' => 'textarea',
-            'value' => $description,
-            'helps' => '스크린리더용 상세 설명 (aria-describedby로 연결됩니다)',
+            'label'         => 'A11Y Description',
+            'input'         => 'textarea',
+            'value'         => $description,
+            'helps'         => '스크린리더용 상세 설명 (aria-describedby로 연결됩니다)',
+            'show_in_rest'  => true,
         );
 
         return $form_fields;
