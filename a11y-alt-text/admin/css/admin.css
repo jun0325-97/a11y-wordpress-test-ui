@@ -556,6 +556,24 @@
   outline: none;
 }
 
+.a11y-settings-form .button-secondary,
+#a11y-settings-form .button-secondary {
+  background: #fff;
+  border-color: var(--a11y-primary-500);
+  color: var(--a11y-primary-500);
+  text-shadow: none;
+  box-shadow: none;
+}
+.a11y-settings-form .button-secondary:hover,
+#a11y-settings-form .button-secondary:hover {
+  background: var(--a11y-primary-100);
+}
+.a11y-settings-form .button-secondary:focus,
+#a11y-settings-form .button-secondary:focus {
+  box-shadow: 0 0 0 2px var(--a11y-primary-300);
+  outline: none;
+}
+
 .button.a11y-header-save-btn {
   min-height: 38px;
   padding-inline: 16px;

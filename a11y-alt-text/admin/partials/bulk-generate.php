@@ -15,7 +15,7 @@
 <?php
   $account_check_failed  = ( $this->account === false );
   $account_error_is_auth = ( $account_check_failed && $this->account_error_type === 'auth' );
-  $no_credits            = ( ! $account_check_failed && is_array( $this->account ) && empty( $this->account['available'] ) );
+  $no_credits            = ( ! $account_check_failed && is_array( $this->account ) && empty( $this->account['credit'] ) );
   $cannot_bulk_update    = ( $account_check_failed || $no_credits );
   $subscriptions_url     = esc_url( A11Y_Utility::get_credits_url() );
   $action                = sanitize_text_field( $_REQUEST['a11y_action'] ?? 'normal' );
@@ -182,17 +182,17 @@ SQL;
       </div>
       <div class="a11y-stat-card">
         <p class="a11y-stat-label"><?php esc_html_e( 'Available Credits', 'a11y-alt-text' ); ?></p>
-        <p class="a11y-stat-sub <?php echo $account_check_failed ? 'is-muted' : ( ( $this->account && $this->account['available'] > 100 ) ? 'is-ok' : 'is-warn' ); ?>">
+        <p class="a11y-stat-sub <?php echo $account_check_failed ? 'is-muted' : ( ( $this->account && $this->account['credit'] > 100 ) ? 'is-ok' : 'is-warn' ); ?>">
           <?php if ( $account_check_failed ) {
             esc_html_e( 'Unavailable', 'a11y-alt-text' );
-          } elseif ( $this->account && $this->account['available'] <= 100 ) {
+          } elseif ( $this->account && $this->account['credit'] <= 100 ) {
             echo 'Low';
           } ?>
         </p>
         <p class="a11y-stat-value">
           <?php echo $account_check_failed
             ? esc_html__( 'N/A', 'a11y-alt-text' )
-            : esc_html( number_format( (int) $this->account['available'] ) ); ?>
+            : esc_html( number_format( (int) $this->account['credit'] ) ); ?>
         </p>
       </div>
     <?php endif; ?>

@@ -53,14 +53,14 @@
 
     <div class="a11y-welcome-header">
       <div class="a11y-welcome-header-left">
-        <svg width="142" height="30" viewBox="0 0 142 30" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <rect width="142" height="30" fill="url(#pattern0_1412_18568)"/>
-          <defs>
-          <pattern id="pattern0_1412_18568" patternContentUnits="objectBoundingBox" width="1" height="1">
-          <use xlink:href="#image0_1412_18568" transform="scale(0.00352113 0.0166667)"/>
-          </pattern>
-          <image id="image0_1412_18568" width="284" height="60" preserveAspectRatio="none" xlink:href="data:image/png;base64,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"/>
-          </defs>
+        <svg width="181" height="30" viewBox="0 0 181 30" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <rect width="181" height="30" fill="url(#pattern0_1418_18569)"/>
+        <defs>
+        <pattern id="pattern0_1418_18569" patternContentUnits="objectBoundingBox" width="1" height="1">
+        <use xlink:href="#image0_1418_18569" transform="scale(0.00277008 0.0166667)"/>
+        </pattern>
+        <image id="image0_1418_18569" width="361" height="60" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWkAAAA8CAYAAACkT0u+AAAACXBIWXMAABYlAAAWJQFJUiTwAAAFu2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4xLWMwMDIgNzkuYjdjNjRjYywgMjAyNC8wNy8xNi0wNzo1OTo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI2LjAgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyNi0wNC0zMFQxNjoyMzoxMiswOTowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjYtMDQtMzBUMTY6NDM6NTQrMDk6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjYtMDQtMzBUMTY6NDM6NTQrMDk6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOmZlZDc0MmRhLTVhZGUtODU0Yy05MDU3LTc1MDYzM2I4NjZlMyIgeG1wTU06RG9jdW1lbnRJRD0i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"/>
+        </defs>
         </svg>
       </div>
       <button id="a11y-welcome-close-btn" class="a11y-welcome-dismiss" aria-label="<?php esc_attr_e( 'Dismiss', 'a11y-alt-text' ); ?>">
@@ -141,6 +141,32 @@
   <div class="a11y-mock-banner" role="status">
     <span class="a11y-mock-badge">Mock Mode</span>
     <p>The A11Y.so API is not yet connected. Any API Key value will work for testing — dummy data will be returned.</p>
+  </div>
+  <?php endif; ?>
+
+  <!-- 설정 저장 성공 알림 — .inline으로 WP JS의 자동 h1 이동 방지 -->
+  <?php if ( isset( $_GET['settings-updated'] ) ) : ?>
+  <div class="notice notice-success is-dismissible inline">
+    <p><strong><?php esc_html_e( 'Settings saved.', 'a11y-alt-text' ); ?></strong></p>
+  </div>
+  <?php endif; ?>
+
+  <!-- 인라인 알림들 — .inline으로 WP JS의 자동 h1 이동 방지 -->
+  <?php if ( isset( $_GET['api_key_missing'] ) && ! $has_api_key ) : ?>
+  <div class="notice notice--a11y notice-warning inline">
+    <p><?php echo wp_kses( __( '[A11Y.so] Please <strong>add your API key</strong> to generate alt text.', 'a11y-alt-text' ), array( 'strong' => array() ) ); ?></p>
+  </div>
+  <?php endif; ?>
+
+  <?php if ( get_transient( 'a11y_insufficient_credits' ) && A11Y_Utility::get_setting( 'a11y_no_credit_warning' ) !== 'yes' ) : ?>
+  <div class="notice notice--a11y notice-error is-dismissible inline">
+    <p><?php printf(
+      wp_kses(
+        __( '[A11Y.so] You have no more credits available. <a href="%s" target="_blank">Manage your account</a> to get more credits.', 'a11y-alt-text' ),
+        array( 'a' => array( 'href' => array(), 'target' => array() ) )
+      ),
+      esc_url( A11Y_Utility::get_credits_url() )
+    ); ?></p>
   </div>
   <?php endif; ?>
 
@@ -253,21 +279,20 @@
                       <p>
                         <?php printf(
                           wp_kses( __( 'You\'re on the <strong>%s</strong> plan.', 'a11y-alt-text' ), array( 'strong' => array() ) ),
-                          esc_html( $this->account['plan'] )
+                          esc_html( $this->account['tw_plan'] )
                         ); ?>
                       </p>
                     <?php endif; ?>
 
                     <p>
                       <?php printf(
-                        wp_kses( __( 'You have <strong>%d</strong> credits available out of <strong>%d</strong>.', 'a11y-alt-text' ), array( 'strong' => array() ) ),
-                        (int) $this->account['available'],
-                        (int) $this->account['quota']
+                        wp_kses( __( 'You have <strong>%d</strong> credits available.', 'a11y-alt-text' ), array( 'strong' => array() ) ),
+                        (int) $this->account['credit']
                       ); ?>
                     </p>
 
                     <?php
-                      $plan = strtolower( $this->account['plan'] );
+                      $plan = strtolower( $this->account['tw_plan'] );
                       $is_upgrade_target = ( strpos($plan, 'enterprise') === false );
                     ?>
 
@@ -394,27 +419,6 @@
                     );
                   endforeach; ?>
                 </select>
-              </td>
-            </tr>
-
-            <!-- alt 생성 시 함께 업데이트할 필드들 -->
-            <tr>
-              <th scope="row"><?php esc_html_e( 'Also update:', 'a11y-alt-text' ); ?></th>
-              <td>
-                <?php foreach ( array(
-                  'a11y_update_title'       => 'Also set the image title with the generated alt text.',
-                  'a11y_update_caption'     => 'Also set the image caption with the generated alt text.',
-                  'a11y_update_description' => 'Also set the image description with the generated alt text.',
-                ) as $opt => $label ) : ?>
-                  <div class="a11y-checkbox-row">
-                    <input type="checkbox" id="<?php echo esc_attr( $opt ); ?>"
-                           name="<?php echo esc_attr( $opt ); ?>" value="yes"
-                           <?php checked( 'yes', A11Y_Utility::get_setting( $opt ) ); ?>>
-                    <label for="<?php echo esc_attr( $opt ); ?>" class="a11y-checkbox-label">
-                      <?php echo esc_html( $label ); ?>
-                    </label>
-                  </div>
-                <?php endforeach; ?>
               </td>
             </tr>
 
@@ -643,6 +647,7 @@
       </div>
     </div>
 
+    <?php $mock_type = get_option('a11y_mock_response_type', 'graphic'); ?>
     <div class="a11y-section-card" style="border-left: 3px solid #f59e0b;">
       <div class="a11y-section-header">
         <h2>🧪 Mock Mode — Test Controls</h2>
@@ -652,19 +657,83 @@
           <tr>
             <th scope="row">Mock Response Type</th>
             <td>
-              <?php $mock_type = get_option('a11y_mock_response_type', 'graphic'); ?>
-              <select name="a11y_mock_response_type">
-                <option value="simple"  <?php selected($mock_type, 'simple');  ?>>간소화 모드 — alt만 반환</option>
-                <option value="graphic" <?php selected($mock_type, 'graphic'); ?>>웹접근성 지침: 일반 이미지 — alt만 반환</option>
-                <option value="complex" <?php selected($mock_type, 'complex'); ?>>웹접근성 지침: 복합 이미지 — alt + 상세설명 반환</option>
-                <option value="decorative" <?php selected($mock_type, 'decorative'); ?>>웹접근성 지침: 장식 이미지 — alt="" 반환</option>
+              <select id="a11y_mock_response_type" name="a11y_mock_response_type">
+                <!-- 간소화 모드 옵션 -->
+                <option value="simple"
+                  class="mock-opt-simple"
+                  <?php selected($mock_type, 'simple'); ?>>
+                  이미지 유형: 간소화 — alt만 반환
+                </option>
+                <!-- 웹접근성 지침 모드 옵션 -->
+                <option value="graphic"
+                  class="mock-opt-wcag"
+                  <?php selected($mock_type, 'graphic'); ?>>
+                  이미지 유형: 일반 이미지 — alt만 반환
+                </option>
+                <option value="complex"
+                  class="mock-opt-wcag"
+                  <?php selected($mock_type, 'complex'); ?>>
+                  이미지 유형: 복합 이미지 — alt + 상세설명 반환
+                </option>
+                <option value="decorative"
+                  class="mock-opt-wcag"
+                  <?php selected($mock_type, 'decorative'); ?>>
+                  이미지 유형: 장식 이미지 — alt="" 반환
+                </option>
+                <!-- 공통 -->
+                <option value="no_credits"
+                  class="mock-opt-simple mock-opt-wcag"
+                  <?php selected($mock_type, 'no_credits'); ?>>
+                  크레딧 없음 — insufficient_credits 에러 반환
+                </option>
               </select>
-              <p class="description">실제 API 연결 전 각 시나리오별 UI를 테스트합니다. 이미지 유형 분류는 내부 처리되며 사용자에게 노출되지 않습니다.</p>
+              <p class="description">Generation Mode에 따라 테스트 가능한 시나리오가 표시됩니다. 이미지 유형 분류는 내부 처리되며 사용자에게 노출되지 않습니다.</p>
             </td>
           </tr>
         </table>
       </div>
     </div>
+
+    <script>
+    (function () {
+      var mockSelect = document.getElementById('a11y_mock_response_type');
+      if (!mockSelect) return;
+
+      function applyMode(mode) {
+        var isSimple  = (mode === 'simple');
+        var showClass = isSimple ? 'mock-opt-simple' : 'mock-opt-wcag';
+
+        Array.from(mockSelect.options).forEach(function (opt) {
+          var show     = opt.classList.contains(showClass);
+          opt.hidden   = !show;
+          opt.disabled = !show;
+        });
+
+        // 현재 선택값이 숨겨진 경우 첫 번째 visible 옵션으로 초기화
+        if (mockSelect.selectedOptions[0] && mockSelect.selectedOptions[0].hidden) {
+          var first = Array.from(mockSelect.options).find(function (o) { return !o.hidden; });
+          if (first) mockSelect.value = first.value;
+        }
+      }
+
+      function getSelectedMode() {
+        var checked = document.querySelector('input[name="a11y_generation_mode"]:checked');
+        return checked ? checked.value : 'wcag';
+      }
+
+      // 초기 적용
+      applyMode(getSelectedMode());
+
+      // 카드 전체 클릭 이벤트 감지 — 기존 카드 JS가 radio.checked를 코드로 변경하므로
+      // change 이벤트가 발생하지 않음. 카드 클릭을 직접 감지해 모드 반영.
+      document.querySelectorAll('.a11y-radio-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+          var radio = this.querySelector('input[name="a11y_generation_mode"]');
+          if (radio) applyMode(radio.value);
+        });
+      });
+    })();
+    </script>
 
 
     <!-- 저장 버튼 + 버전 표시 -->

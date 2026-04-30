@@ -135,15 +135,9 @@ class A11Y_Attachment {
     // Normalize booleans that might arrive as strings/ints via filters
     $api_options['overwrite'] = ! empty( $api_options['overwrite'] ) ? true : false;
 
-    $gpt_prompt = A11Y_Utility::get_setting('a11y_gpt_prompt');
-    if ( !empty($gpt_prompt) ) {
-      $api_options['gpt_prompt'] = $gpt_prompt;
-    }
-
-    $model_name = A11Y_Utility::get_setting('a11y_model_name');
-    if ( !empty($model_name) ) {
-      $api_options['model_name'] = $model_name;
-    }
+    // 생성 모드 설정값을 is_simple_mode 플래그로 변환해 API 옵션에 포함
+    $generation_mode = A11Y_Utility::get_setting( 'a11y_generation_mode', 'wcag' );
+    $api_options['is_simple_mode'] = ( $generation_mode === 'simple' );
 
     if ( $attachment_id ) {
       $attachment_url = wp_get_attachment_image_url( $attachment_id, 'full' );
@@ -258,63 +252,37 @@ class A11Y_Attachment {
       return $response;
     }
 
-    $alt_text = $response['alt_text'];
+    // 5번: img_hash 저장 (싱크 라이브러리 매핑 기준)
+    if ( ! empty( $response['img_hash'] ) ) {
+        update_post_meta( $attachment_id, 'a11y_img_hash', sanitize_text_field( $response['img_hash'] ) );
+    }
 
-    // description은 HTML로 오므로 wp_kses로 허용 태그만 필터링
-    if (!empty($response['description'])) {
-        $allowed_tags = wp_kses_allowed_html('post');
+    // description은 HTML로 오므로 wp_kses로 허용 태그만 필터링 (복합형만 값 있음)
+    if ( ! empty( $response['description'] ) ) {
+        $allowed_tags = wp_kses_allowed_html( 'post' );
         update_post_meta(
             $attachment_id,
             'a11y_description',
-            wp_kses($response['description'], $allowed_tags)
+            wp_kses( $response['description'], $allowed_tags )
         );
     }
 
-    // type 필드명이 img_type으로 변경됨
-    if (!empty($response['img_type'])) {
-        update_post_meta($attachment_id, 'a11y_image_type', sanitize_text_field($response['img_type']));
+    if ( ! empty( $response['img_type'] ) ) {
+        update_post_meta( $attachment_id, 'a11y_image_type', sanitize_text_field( $response['img_type'] ) );
     }
 
-    // 모드/모델 정보도 저장 (디버깅 및 향후 활용)
-    if (!empty($response['mode'])) {
-        update_post_meta($attachment_id, 'a11y_generation_mode', sanitize_text_field($response['mode']));
+    if ( ! empty( $response['mode'] ) ) {
+        update_post_meta( $attachment_id, 'a11y_generation_mode', sanitize_text_field( $response['mode'] ) );
     }
-    if (!empty($response['model'])) {
-        update_post_meta($attachment_id, 'a11y_model', sanitize_text_field($response['model']));
+    if ( ! empty( $response['model'] ) ) {
+        update_post_meta( $attachment_id, 'a11y_model', sanitize_text_field( $response['model'] ) );
     }
-    update_post_meta($attachment_id, 'a11y_generated_at', current_time('mysql'));
+    update_post_meta( $attachment_id, 'a11y_generated_at', current_time( 'mysql' ) );
 
-    $alt_prefix = A11Y_Utility::get_setting('a11y_alt_prefix');
-    $alt_suffix = A11Y_Utility::get_setting('a11y_alt_suffix');
+    $alt_text = $response['alt_text'];
 
-    if ( ! empty( $alt_prefix ) ) {
-      $alt_text = trim( $alt_prefix ) . ' ' . $alt_text;
-    }
-
-    if ( ! empty( $alt_suffix ) ) {
-      $alt_text = $alt_text . ' ' . trim( $alt_suffix );
-    }
-
-    A11Y_Utility::record_a11y_asset($attachment_id, $response['asset_id']);
+    // 4번: 장식형(alt='')은 빈값이 의도된 결과 — is_string 체크로 false와 구분해 저장 보장
     update_post_meta( $attachment_id, '_wp_attachment_image_alt', $alt_text );
-
-    $post_value_updates = array();
-    if ( A11Y_Utility::get_setting( 'a11y_update_title' ) === 'yes' ) {
-      $post_value_updates['post_title'] = $alt_text;
-    };
-
-    if ( A11Y_Utility::get_setting( 'a11y_update_caption' ) === 'yes' ) {
-      $post_value_updates['post_excerpt'] = $alt_text;
-    };
-
-    if ( A11Y_Utility::get_setting( 'a11y_update_description' ) === 'yes' ) {
-      $post_value_updates['post_content'] = $alt_text;
-    };
-
-    if ( ! empty( $post_value_updates ) ) {
-      $post_value_updates['ID'] = $attachment_id;
-      wp_update_post( $post_value_updates );
-    };
 
     do_action( 'a11y_alttext_generated', $attachment_id, $alt_text );
 
@@ -1139,7 +1107,12 @@ SQL;
 
     // Generate alt text for primary attachment (skip if its language is excluded)
     if ( $this->should_auto_process_wpml_attachment( $attachment_id ) ) {
-      $this->generate_alt( $attachment_id );
+      $result = $this->generate_alt( $attachment_id );
+
+      // 크레딧 소진 시 transient 저장 → admin_notices에서 에러 배너 표시
+      if ( $result === 'insufficient_credits' && A11Y_Utility::get_setting( 'a11y_no_credit_warning' ) !== 'yes' ) {
+        set_transient( 'a11y_insufficient_credits', true, DAY_IN_SECONDS );
+      }
     }
 
     // Process WPML translations if applicable (has its own language filtering)
@@ -2035,6 +2008,52 @@ SQL;
    *
    * @param Array $actions Array of bulk actions.
    */
+  /**
+   * Add A11Y Description field to the media attachment edit form.
+   *
+   * @since 0.1.0
+   * @access public
+   */
+  public function add_attachment_description_field( $form_fields, $post ) {
+    $description = get_post_meta( $post->ID, 'a11y_description', true );
+    $form_fields['a11y_description'] = array(
+      'label'        => 'A11Y Description',
+      'input'        => 'textarea',
+      'value'        => $description,
+      'helps'        => __( 'Long description for screen readers (connected via aria-describedby).', 'a11y-alt-text' ),
+      'show_in_rest' => true,
+    );
+    return $form_fields;
+  }
+
+  /**
+   * Save A11Y Description field from the media attachment edit form.
+   *
+   * @since 0.1.0
+   * @access public
+   */
+  public function save_attachment_description_field( $post, $attachment ) {
+    if ( ! isset( $attachment['a11y_description'] ) ) {
+      return $post;
+    }
+    $allowed_tags = array(
+      'p'       => array(),
+      'br'      => array(),
+      'ul'      => array(), 'ol' => array(), 'li' => array(),
+      'strong'  => array(), 'em' => array(),
+      'h1'      => array(), 'h2' => array(), 'h3' => array(), 'h4' => array(),
+      'table'   => array(), 'thead' => array(), 'tbody' => array(),
+      'tr'      => array(), 'th' => array( 'scope' => array() ), 'td' => array(),
+      'caption' => array(),
+    );
+    update_post_meta(
+      $post['ID'],
+      'a11y_description',
+      wp_kses( wp_unslash( $attachment['a11y_description'] ), $allowed_tags )
+    );
+    return $post;
+  }
+
   public function add_bulk_select_action( $actions ) {
     $actions[ 'alttext_options' ] = __( '&#8595; A11Y.so', 'a11y-alt-text' );
     $actions[ 'alttext_generate_alt' ] = __( 'Generate Alt Text', 'a11y-alt-text' );
@@ -2702,56 +2721,3 @@ SQL;
 }
 
 
-    add_filter('attachment_fields_to_edit', 'a11y_add_attachment_fields', 10, 2);
-    function a11y_add_attachment_fields($form_fields, $post) {
-        // ✅ 이미지 유형을 먼저 추가 (Required fields 안내문 위에 표시됨)
-        // $type = get_post_meta($post->ID, 'a11y_image_type', true);
-        // if ($type) {
-        //     $type_labels = array(
-        //         'complex' => '복합형',
-        //         'simple'  => '단일형',
-        //     );
-        //     $form_fields['a11y_image_type'] = array(
-        //         'label' => 'A11Y 이미지 유형',
-        //         'input' => 'html',
-        //         'html'  => sprintf(
-        //             '<span style="margin-top: 5px; display: inline-block;background:#e8e0f4;color:#534AB7;padding:2px 8px;border-radius:4px;font-size:12px;">%s</span>',
-        //             esc_html($type_labels[$type] ?? $type)
-        //         ),
-        //     );
-        // }
-
-        // ✅ Description은 그 다음에 추가
-        $description = get_post_meta($post->ID, 'a11y_description', true);
-        $form_fields['a11y_description'] = array(
-            'label'         => 'A11Y Description',
-            'input'         => 'textarea',
-            'value'         => $description,
-            'helps'         => '스크린리더용 상세 설명 (aria-describedby로 연결됩니다)',
-            'show_in_rest'  => true,
-        );
-
-        return $form_fields;
-    }
-
-    add_filter('attachment_fields_to_save', 'a11y_save_attachment_fields', 10, 2);
-    function a11y_save_attachment_fields($post, $attachment) {
-        if (isset($attachment['a11y_description'])) {
-            $allowed_tags = array(
-                'p'      => array(),
-                'br'     => array(),
-                'ul'     => array(), 'ol' => array(), 'li' => array(),
-                'strong' => array(), 'em' => array(),
-                'h1'     => array(),'h2'     => array(), 'h3' => array(), 'h4' => array(),
-                'table'  => array(), 'thead' => array(), 'tbody' => array(),
-                'tr'     => array(), 'th' => array('scope' => array()), 'td' => array(),
-                'caption'=> array(),
-            );
-            update_post_meta(
-                $post['ID'],
-                'a11y_description',
-                wp_kses( wp_unslash( $attachment['a11y_description'] ), $allowed_tags )
-            );
-        }
-        return $post;
-    }

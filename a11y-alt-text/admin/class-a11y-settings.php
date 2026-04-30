@@ -353,13 +353,6 @@ class A11Y_Settings {
       )
     );
 
-    register_setting(
-			'a11y-settings',
-      'a11y_model_name',
-      array(
-        'default'           => null,
-      )
-    );
 
     register_setting(
 			'a11y-settings',
@@ -378,32 +371,6 @@ class A11Y_Settings {
       )
     );
 
-    register_setting(
-			'a11y-settings',
-      'a11y_update_title',
-      array(
-        'sanitize_callback' => array( $this, 'sanitize_yes_no_checkbox' ),
-        'default'           => 'no',
-      )
-    );
-
-    register_setting(
-			'a11y-settings',
-      'a11y_update_caption',
-      array(
-        'sanitize_callback' => array( $this, 'sanitize_yes_no_checkbox' ),
-        'default'           => 'no',
-      )
-    );
-
-    register_setting(
-			'a11y-settings',
-      'a11y_update_description',
-      array(
-        'sanitize_callback' => array( $this, 'sanitize_yes_no_checkbox' ),
-        'default'           => 'no',
-      )
-    );
 
     register_setting(
 			'a11y-settings',
@@ -476,32 +443,6 @@ class A11Y_Settings {
       )
     );
 
-    register_setting(
-			'a11y-settings',
-      'a11y_alt_prefix',
-      array(
-        'sanitize_callback' => 'sanitize_text_field',
-        'default'           => '',
-      )
-    );
-
-    register_setting(
-			'a11y-settings',
-      'a11y_alt_suffix',
-      array(
-        'sanitize_callback' => 'sanitize_text_field',
-        'default'           => '',
-      )
-    );
-
-    register_setting(
-			'a11y-settings',
-      'a11y_gpt_prompt',
-      array(
-        'sanitize_callback' => array( $this, 'sanitize_gpt_prompt' ),
-        'default'           => '',
-      )
-    );
 
     register_setting(
 			'a11y-settings',
@@ -592,13 +533,25 @@ class A11Y_Settings {
       )
     );
 
-     // Mock Mode 테스트용 — 실제 API 연결 후 제거
+    register_setting(
+      'a11y-settings',
+      'a11y_generation_mode',
+      array(
+        'sanitize_callback' => function( $val ) {
+          return in_array( $val, array( 'wcag', 'simple' ), true ) ? $val : 'wcag';
+        },
+        'default' => 'wcag',
+      )
+    );
+
+    // Mock Mode 테스트용 — 실제 API 연결 후 제거
     register_setting(
       'a11y-settings',
       'a11y_mock_response_type',
       array(
         'sanitize_callback' => function( $val ) {
-          return in_array( $val, array( 'graphic', 'complex', 'simple' ), true ) ? $val : 'graphic';
+          $allowed = array( 'graphic', 'complex', 'decorative', 'simple', 'no_credits' );
+          return in_array( $val, $allowed, true ) ? $val : 'graphic';
         },
         'default' => 'graphic',
       )
@@ -736,20 +689,13 @@ class A11Y_Settings {
     return array(
       'a11y_api_key'                => '',
       'a11y_lang'                   => 'en',
-      'a11y_model_name'             => '',
       'a11y_force_lang'             => 'no',
-      'a11y_update_title'           => 'no',
-      'a11y_update_caption'         => 'no',
-      'a11y_update_description'     => 'no',
       'a11y_enabled'                => 'yes',
       'a11y_skip_filenotfound'      => 'no',
       'a11y_keywords'               => 'yes',
       'a11y_keywords_title'         => 'no',
       'a11y_ecomm'                  => 'yes',
       'a11y_ecomm_title'            => 'no',
-      'a11y_alt_prefix'             => '',
-      'a11y_alt_suffix'             => '',
-      'a11y_gpt_prompt'             => '',
       'a11y_type_extensions'        => '',
       'a11y_excluded_post_types'    => '',
       'a11y_bulk_refresh_overwrite' => 'no',
@@ -867,25 +813,6 @@ class A11Y_Settings {
     $filtered_post_types = array_filter( $sanitized_post_types );
     
     return implode( ',', $filtered_post_types );
-  }
-
-  /**
-   * Sanitizes a custom ChatGPT prompt to ensure it contains the {{AltText} macro and isn't too long.
-   *
-   * @since 1.2.4
-   * @access public
-   *
-   * @param string $input The text of the GPT prompt.
-   *
-   * @return string Returns the prompt string if valid, otherwise an empty string.
-   */
-  public function sanitize_gpt_prompt( $input ) {
-    if ( strlen($input) > 512 || strpos($input, "{{AltText}}") === false ) {
-      return '';
-    }
-    else {
-      return sanitize_textarea_field($input);
-    }
   }
 
   /**
@@ -1106,6 +1033,12 @@ class A11Y_Settings {
       return;
     }
 
+    // settings.php 인라인으로 렌더하므로 해당 페이지에서는 중복 출력 생략
+    $screen = get_current_screen();
+    if ( $screen && $screen->id === 'toplevel_page_a11y' ) {
+      return;
+    }
+
     echo '<div class="notice notice--a11y notice-error is-dismissible"><p>';
 
     printf(
@@ -1147,6 +1080,12 @@ class A11Y_Settings {
     $api_key = A11Y_Utility::get_api_key();
 
     if ( ! empty( $api_key ) ) {
+      return;
+    }
+
+    // settings.php 인라인으로 렌더하므로 해당 페이지에서는 중복 출력 생략
+    $screen = get_current_screen();
+    if ( $screen && $screen->id === 'toplevel_page_a11y' ) {
       return;
     }
 

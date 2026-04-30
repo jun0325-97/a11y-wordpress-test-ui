@@ -247,6 +247,8 @@ class A11Y {
 
     $this->loader->add_filter( 'bulk_actions-upload', $attachment, 'add_bulk_select_action', 10, 1 );
     $this->loader->add_filter( 'handle_bulk_actions-upload', $attachment, 'bulk_select_action_handler', 10, 3 );
+    $this->loader->add_filter( 'attachment_fields_to_edit', $attachment, 'add_attachment_description_field', 10, 2 );
+    $this->loader->add_filter( 'attachment_fields_to_save', $attachment, 'save_attachment_description_field', 10, 2 );
 
     // Post
     $this->loader->add_action( 'deleted_post', $post, 'on_post_deleted' );

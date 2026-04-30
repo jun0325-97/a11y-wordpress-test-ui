@@ -20,8 +20,15 @@
       const [isSaving, setIsSaving] = useState(false);
       const [saveStatus, setSaveStatus] = useState(null); // 'saved' | 'error' | null
       const isSavingRef = useRef(false); // subscribe 클로저용 ref
+      const [mounted, setMounted] = useState(false); // InspectorControls 등록 타이밍 제어용
 
-      // ─── 1) 마운트 시 REST API로 현재 값 읽기 ────────────────────
+      // ─── 1) 마운트 시 REST API로 현재 값 읽기 & 패널 등록 타이밍 제어 ────
+      useEffect(() => {
+        // mounted=true → InspectorControls 렌더 시작
+        // native 블록 패널이 먼저 등록된 뒤 우리 패널이 등록되어 항상 Settings 아래에 위치
+        setMounted(true);
+      }, []);
+
       useEffect(() => {
         if (!attachmentId) return;
 
@@ -37,11 +44,9 @@
         if (!attachmentId) return;
 
         const unsubscribe = subscribe(() => {
-          const editor = wp.data.select("core/editor");
+          const editor    = wp.data.select("core/editor");
           const nowSaving = editor.isSavingPost();
-          const wasSuccess = editor.didPostSaveRequestSucceed();
 
-          // 저장이 시작되는 순간
           if (nowSaving && !isSavingRef.current) {
             isSavingRef.current = true;
             setIsSaving(true);
@@ -64,21 +69,22 @@
               });
           }
 
-          // 저장이 끝나면 ref 초기화
           if (!nowSaving) {
             isSavingRef.current = false;
           }
         });
 
         return () => unsubscribe();
-      }, [attachmentId, description]); // description 변경될 때마다 최신값 참조
+      }, [attachmentId, description]);
 
       // ─── 렌더 ─────────────────────────────────────────────────────
+      // BlockEdit를 먼저 렌더해 native 패널(Settings 등)이 slot에 먼저 등록되게 하고,
+      // mounted=true 후에만 InspectorControls를 렌더해 항상 Settings 아래에 위치 고정
       return wp.element.createElement(
         Fragment,
         null,
         wp.element.createElement(BlockEdit, props),
-        wp.element.createElement(
+        mounted && wp.element.createElement(
           InspectorControls,
           null,
           wp.element.createElement(
