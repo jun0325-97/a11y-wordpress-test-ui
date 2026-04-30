@@ -44,11 +44,11 @@ SQL
   <!-- 목업 모드 배너 -->
   <div class="a11y-mock-banner" role="status">
     <span class="a11y-mock-badge">Mock Mode</span>
-    <p>The A11Y API is not yet connected. History below reflects mock-generated data.</p>
+    <p>The A11Y.so API is not yet connected. History below reflects mock-generated data.</p>
   </div>
 
   <h1><?php esc_html_e( 'Alt Text Processing History', 'a11y-alt-text' ); ?></h1>
-  <p><?php esc_html_e( 'Below is a list of all images from your Media Library which have been processed by A11Y.', 'a11y-alt-text' ); ?></p>
+  <p><?php esc_html_e( 'Below is a list of all images from your Media Library which have been processed by A11Y.so.', 'a11y-alt-text' ); ?></p>
 
   <?php if ( $total_assets === 0 ) : ?>
 

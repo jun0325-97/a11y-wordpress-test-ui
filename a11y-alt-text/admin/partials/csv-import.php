@@ -41,7 +41,7 @@
 
   <h1><?php esc_html_e( 'Sync Alt Text Library', 'a11y-alt-text' ); ?></h1>
   <p>
-    <?php esc_html_e( 'Synchronize any changes or edits from your online A11Y image library to WordPress. Any matching images in WordPress will be updated with the corresponding alt text from your library.', 'a11y-alt-text' ); ?>
+    <?php esc_html_e( 'Synchronize any changes or edits from your online A11Y.so image library to WordPress. Any matching images in WordPress will be updated with the corresponding alt text from your library.', 'a11y-alt-text' ); ?>
   </p>
 
   <!-- 처리 결과 메시지 -->
@@ -63,7 +63,7 @@
           <li>
             <?php printf(
               wp_kses(
-                __( 'Go to your <a href="%s" target="_blank" rel="noopener noreferrer">A11Y Image Library</a>.', 'a11y-alt-text' ),
+                __( 'Go to your <a href="%s" target="_blank" rel="noopener noreferrer">A11Y.so Image Library</a>.', 'a11y-alt-text' ),
                 array( 'a' => array( 'href' => array(), 'target' => array(), 'rel' => array() ) )
               ),
               'https://a11y.so/images'
@@ -157,7 +157,7 @@
         style="display:block; padding:20px 24px; text-decoration:none;"
       >
         <p style="margin:0 0 4px; font-size:16px; font-weight:600; color:#fff;">
-          <?php esc_html_e( 'Do you like A11Y? Leave us a review!', 'a11y-alt-text' ); ?>
+          <?php esc_html_e( 'Do you like A11Y.so? Leave us a review!', 'a11y-alt-text' ); ?>
         </p>
         <p style="margin:0 0 8px; font-size:13px; color:rgba(255,255,255,0.8);">
           <?php esc_html_e( 'Help spread the word on WordPress.org. We\'d really appreciate it!', 'a11y-alt-text' ); ?>

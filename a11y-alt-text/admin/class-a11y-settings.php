@@ -5,8 +5,8 @@
  * @link       https://a11y.so
  * @since      1.0.0
  *
- * @package    A11Y
- * @subpackage A11Y/admin
+ * @package    A11Y.so
+ * @subpackage A11Y.so/admin
  */
 
 /**
@@ -14,9 +14,9 @@
  *
  * Renders the Options page, sanitizes, stores and fetches the options.
  *
- * @package    A11Y
- * @subpackage A11Y/admin
- * @author     A11Y <info@a11y.so>
+ * @package    A11Y.so
+ * @subpackage A11Y.so/admin
+ * @author     A11Y.so <info@a11y.so>
  */
 class A11Y_Settings {
   /**
@@ -91,12 +91,12 @@ class A11Y_Settings {
     $capability = A11Y_Utility::get_setting( 'a11y_admin_capability', 'manage_options' );
     // Main page
 		add_menu_page(
-			__( 'A11Y WordPress Settings', 'a11y-alt-text' ),
-			__( 'A11Y', 'a11y-alt-text' ),
+			__( 'A11Y.so WordPress Settings', 'a11y-alt-text' ),
+			__( 'A11Y.so', 'a11y-alt-text' ),
 			$capability,
       'a11y',
       array( $this, 'render_settings_page' ),
-      'dashicons-format-image'
+      'dashicons-visibility'
     );
 
     // Settings submenu item
@@ -165,8 +165,8 @@ class A11Y_Settings {
 
     $hook_suffix = add_submenu_page(
       'settings.php', // Parent slug (network admin settings)
-      __( 'A11Y Network Settings', 'a11y-alt-text' ),
-      __( 'A11Y', 'a11y-alt-text' ),
+      __( 'A11Y.so Network Settings', 'a11y-alt-text' ),
+      __( 'A11Y.so', 'a11y-alt-text' ),
       'manage_network_options',
       'a11y-network',
       array( $this, 'render_network_settings_page' )
@@ -201,8 +201,8 @@ class A11Y_Settings {
 
     add_submenu_page(
       'settings.php',
-      __( 'A11Y Network Bulk Generate', 'a11y-alt-text' ),
-      __( 'A11Y Bulk Generate', 'a11y-alt-text' ),
+      __( 'A11Y.so Network Bulk Generate', 'a11y-alt-text' ),
+      __( 'A11Y.so Bulk Generate', 'a11y-alt-text' ),
       'manage_network_options',
       'a11y-network-bulk-generate',
       array( $this, 'render_network_bulk_generate_page' )
@@ -1077,7 +1077,7 @@ class A11Y_Settings {
     if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'a11y_clear_error_logs' ) ) {
       wp_die(
         esc_html__( 'Security verification failed. Please refresh the page and try again.', 'a11y-alt-text' ),
-        esc_html__( 'A11Y', 'a11y-alt-text' ),
+        esc_html__( 'A11Y.so', 'a11y-alt-text' ),
         array( 'back_link' => true )
       );
     }
@@ -1110,7 +1110,7 @@ class A11Y_Settings {
 
     printf(
       wp_kses(
-        __( '[A11Y] You have no more credits available. <a href="%s" target="_blank">Manage your account</a> to get more credits.', 'a11y-alt-text' ),
+        __( '[A11Y.so] You have no more credits available. <a href="%s" target="_blank">Manage your account</a> to get more credits.', 'a11y-alt-text' ),
         array( 'a' => array( 'href' => array(), 'target' => array() ) )
       ),
       esc_url( A11Y_Utility::get_credits_url() )
@@ -1152,7 +1152,7 @@ class A11Y_Settings {
 
     echo '<div class="notice notice--a11y notice-warning"><p>';
     echo wp_kses(
-      __('[A11Y] Please <strong>add your API key</strong> to generate alt text.', 'a11y-alt-text' ),
+      __('[A11Y.so] Please <strong>add your API key</strong> to generate alt text.', 'a11y-alt-text' ),
       array( 'strong' => array() )
     );
     echo '</p></div>';

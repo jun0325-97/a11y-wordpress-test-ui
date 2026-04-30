@@ -90,6 +90,7 @@ button.a11y-hidden {
   visibility: hidden;
   margin-top: 5px;
   display: block;
+  color: rgb(156, 163, 175);
 }
 
 .a11y-generate-button .a11y-update-notice--success,

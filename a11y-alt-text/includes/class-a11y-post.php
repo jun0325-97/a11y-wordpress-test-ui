@@ -61,7 +61,7 @@ class A11Y_Post {
   public function add_bulk_generate_meta_box() {
     add_meta_box(
       'a11y-generate-meta-box',
-      __( 'A11Y', 'a11y-alt-text' ),
+      __( 'A11Y.so', 'a11y-alt-text' ),
       [ $this, 'bulk_generate_meta_box_callback' ],
       'post',
       'side'
@@ -69,7 +69,7 @@ class A11Y_Post {
 
     add_meta_box(
       'a11y-generate-meta-box',
-      __( 'A11Y', 'a11y-alt-text' ),
+      __( 'A11Y.so', 'a11y-alt-text' ),
       [ $this, 'bulk_generate_meta_box_callback' ],
       'page',
       'side'
@@ -78,7 +78,7 @@ class A11Y_Post {
     if ( A11Y_Utility::has_woocommerce() ) {
       add_meta_box(
         'a11y-generate-meta-box',
-        __( 'A11Y', 'a11y-alt-text' ),
+        __( 'A11Y.so', 'a11y-alt-text' ),
         [ $this, 'bulk_generate_meta_box_callback' ],
         'product',
         'side'
@@ -142,7 +142,7 @@ class A11Y_Post {
       >
           <img
             src="<?php echo esc_url(plugin_dir_url( A11Y_PLUGIN_FILE ) . 'admin/img/icon-button-generate.svg'); ?>"
-            alt="<?php esc_html_e( 'Refresh alt text with A11Y', 'a11y-alt-text' ); ?>">
+            alt="<?php esc_html_e( 'Refresh alt text with A11Y.so', 'a11y-alt-text' ); ?>">
           <span>Refresh Alt Text</span>
       </a>
       <span class="a11y-update-notice"></span>
@@ -180,7 +180,7 @@ class A11Y_Post {
     if ( empty($image_attachment_ids) ) {
       if ( $is_ajax ) {
         // Set a transient to show a success notice after page reload
-        set_transient( 'a11y_enrich_post_content_success', __( '[A11Y] No images were found to update.', 'a11y-alt-text' ), 60 );
+        set_transient( 'a11y_enrich_post_content_success', __( '[A11Y.so] No images were found to update.', 'a11y-alt-text' ), 60 );
         wp_send_json_success();
       }
 
@@ -219,10 +219,10 @@ class A11Y_Post {
     if ( $is_ajax ) {
       // Set a transient to show a success notice after page reload
       if ( $no_credits ) {
-        $success_msg = sprintf( __('[A11Y] You have no more credits available. Go to your account on A11Y to get more credits.', 'a11y-alt-text') );
+        $success_msg = sprintf( __('[A11Y.so] You have no more credits available. Go to your account on A11Y.so to get more credits.', 'a11y-alt-text') );
       }
       else {
-        $success_msg = sprintf( __('[A11Y] Refreshed alt text for %d images (%d generated).', 'a11y-alt-text'), $total_images_found, $num_alttext_generated );
+        $success_msg = sprintf( __('[A11Y.so] Refreshed alt text for %d images (%d generated).', 'a11y-alt-text'), $total_images_found, $num_alttext_generated );
       }
 
       set_transient( 'a11y_enrich_post_content_success', $success_msg, 60 );
@@ -286,12 +286,12 @@ class A11Y_Post {
           $total_images_found = $product_response['total_images_found'];
           $num_alttext_generated = $product_response['num_alttext_generated'];
           if ( $is_ajax ) {
-            set_transient( 'a11y_enrich_post_content_success', sprintf( __( '[A11Y] Refreshed alt text for %d images (%d generated).', 'a11y-alt-text' ), $total_images_found, $num_alttext_generated ), 60 );
+            set_transient( 'a11y_enrich_post_content_success', sprintf( __( '[A11Y.so] Refreshed alt text for %d images (%d generated).', 'a11y-alt-text' ), $total_images_found, $num_alttext_generated ), 60 );
             wp_send_json_success();
           }
       } elseif ( $is_ajax ) {
           // Set a transient to show a success notice after page reload
-          set_transient( 'a11y_enrich_post_content_success', __( '[A11Y] Content is empty, no update needed.', 'a11y-alt-text' ), 60 );
+          set_transient( 'a11y_enrich_post_content_success', __( '[A11Y.so] Content is empty, no update needed.', 'a11y-alt-text' ), 60 );
           wp_send_json_success();
       }
 
@@ -484,10 +484,10 @@ class A11Y_Post {
     if ( $is_ajax ) {
       // Set a transient to show a success notice after page reload
       if ( $no_credits ) {
-        $success_msg = sprintf( __('[A11Y] You have no more credits available. Go to your account on A11Y to get more credits.', 'a11y-alt-text') );
+        $success_msg = sprintf( __('[A11Y.so] You have no more credits available. Go to your account on A11Y.so to get more credits.', 'a11y-alt-text') );
       }
       else {
-        $success_msg = sprintf( __('[A11Y] Refreshed alt text for %d images (%d generated).', 'a11y-alt-text'), $total_images_found, $num_alttext_generated );
+        $success_msg = sprintf( __('[A11Y.so] Refreshed alt text for %d images (%d generated).', 'a11y-alt-text'), $total_images_found, $num_alttext_generated );
       }
 
       set_transient( 'a11y_enrich_post_content_success', $success_msg, 60 );
@@ -669,7 +669,7 @@ class A11Y_Post {
    * @param Array $actions Array of bulk actions.
    */
   public function add_bulk_select_action( $actions ) {
-    $actions[ 'alttext_options' ] = __( '&#8595; A11Y', 'a11y-alt-text' );
+    $actions[ 'alttext_options' ] = __( '&#8595; A11Y.so', 'a11y-alt-text' );
     $actions[ 'alttext_generate_alt' ] = __( 'Refresh Alt Text', 'a11y-alt-text' );
     return $actions;
   }
@@ -715,7 +715,7 @@ class A11Y_Post {
 
     // Set a transient to show a success notice after page reload
     $success_msg = sprintf(
-      __('[A11Y] Refreshed alt text for %d images (%d generated).', 'a11y-alt-text'),
+      __('[A11Y.so] Refreshed alt text for %d images (%d generated).', 'a11y-alt-text'),
       $total_images_found,
       $num_alttext_generated
     );

@@ -84,7 +84,7 @@
           wp.element.createElement(
             PanelBody,
             {
-              title: __("A11Y: Long Description", "a11y-alt-text"),
+              title: __("A11Y.so Description", "a11y-alt-text"),
               initialOpen: true,
             },
 

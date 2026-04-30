@@ -32,7 +32,7 @@ if (!defined('WPINC')) {
       <div class="a11y-card mb-8">
         <div class="a11y-card-header">
           <h2 class="a11y-card-title"><?php esc_html_e('Network Settings', 'a11y-alt-text'); ?></h2>
-          <p class="a11y-card-description"><?php esc_html_e('Configure network-wide settings for A11Y', 'a11y-alt-text'); ?></p>
+          <p class="a11y-card-description"><?php esc_html_e('Configure network-wide settings for A11Y.so', 'a11y-alt-text'); ?></p>
         </div>
         
         <div class="a11y-card-body">

@@ -1,4 +1,4 @@
-# Copyright (C) 2026 A11Y.SO
+# Copyright (C) 2026 A11Y.so
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Author of the plugin
 #: a11y.php
-msgid "A11Y.SO"
+msgid "A11Y.so"
 msgstr ""
 
 #. Author URI of the plugin

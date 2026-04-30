@@ -1837,7 +1837,7 @@ SQL;
     if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'a11y_url_generate' ) ) {
       wp_die(
         esc_html__( 'Security verification failed. Please refresh the page and try again.', 'a11y-alt-text' ),
-        esc_html__( 'A11Y', 'a11y-alt-text' ),
+        esc_html__( 'A11Y.so', 'a11y-alt-text' ),
         array( 'back_link' => true )
       );
     }
@@ -2036,7 +2036,7 @@ SQL;
    * @param Array $actions Array of bulk actions.
    */
   public function add_bulk_select_action( $actions ) {
-    $actions[ 'alttext_options' ] = __( '&#8595; A11Y', 'a11y-alt-text' );
+    $actions[ 'alttext_options' ] = __( '&#8595; A11Y.so', 'a11y-alt-text' );
     $actions[ 'alttext_generate_alt' ] = __( 'Generate Alt Text', 'a11y-alt-text' );
     return $actions;
   }
@@ -2300,13 +2300,13 @@ SQL;
     fclose( $handle );
     unlink( $filename );
 
-    $message = __( '[A11Y] No images were matched.', 'a11y-alt-text' );
+    $message = __( '[A11Y.so] No images were matched.', 'a11y-alt-text' );
 
     if ( $images_updated ) {
       $message = sprintf(
         _n(
-          '[A11Y] Successfully imported alt text for %d image.',
-          '[A11Y] Successfully imported alt text for %d images.',
+          '[A11Y.so] Successfully imported alt text for %d image.',
+          '[A11Y.so] Successfully imported alt text for %d images.',
           $images_updated,
           'a11y-alt-text'
         ),
@@ -2705,21 +2705,21 @@ SQL;
     add_filter('attachment_fields_to_edit', 'a11y_add_attachment_fields', 10, 2);
     function a11y_add_attachment_fields($form_fields, $post) {
         // ✅ 이미지 유형을 먼저 추가 (Required fields 안내문 위에 표시됨)
-        $type = get_post_meta($post->ID, 'a11y_image_type', true);
-        if ($type) {
-            $type_labels = array(
-                'complex' => '복합형',
-                'simple'  => '단일형',
-            );
-            $form_fields['a11y_image_type'] = array(
-                'label' => 'A11Y 이미지 유형',
-                'input' => 'html',
-                'html'  => sprintf(
-                    '<span style="margin-top: 5px; display: inline-block;background:#e8e0f4;color:#534AB7;padding:2px 8px;border-radius:4px;font-size:12px;">%s</span>',
-                    esc_html($type_labels[$type] ?? $type)
-                ),
-            );
-        }
+        // $type = get_post_meta($post->ID, 'a11y_image_type', true);
+        // if ($type) {
+        //     $type_labels = array(
+        //         'complex' => '복합형',
+        //         'simple'  => '단일형',
+        //     );
+        //     $form_fields['a11y_image_type'] = array(
+        //         'label' => 'A11Y 이미지 유형',
+        //         'input' => 'html',
+        //         'html'  => sprintf(
+        //             '<span style="margin-top: 5px; display: inline-block;background:#e8e0f4;color:#534AB7;padding:2px 8px;border-radius:4px;font-size:12px;">%s</span>',
+        //             esc_html($type_labels[$type] ?? $type)
+        //         ),
+        //     );
+        // }
 
         // ✅ Description은 그 다음에 추가
         $description = get_post_meta($post->ID, 'a11y_description', true);
@@ -2737,7 +2737,21 @@ SQL;
     add_filter('attachment_fields_to_save', 'a11y_save_attachment_fields', 10, 2);
     function a11y_save_attachment_fields($post, $attachment) {
         if (isset($attachment['a11y_description'])) {
-            update_post_meta($post['ID'], 'a11y_description', sanitize_textarea_field($attachment['a11y_description']));
+            $allowed_tags = array(
+                'p'      => array(),
+                'br'     => array(),
+                'ul'     => array(), 'ol' => array(), 'li' => array(),
+                'strong' => array(), 'em' => array(),
+                'h1'     => array(),'h2'     => array(), 'h3' => array(), 'h4' => array(),
+                'table'  => array(), 'thead' => array(), 'tbody' => array(),
+                'tr'     => array(), 'th' => array('scope' => array()), 'td' => array(),
+                'caption'=> array(),
+            );
+            update_post_meta(
+                $post['ID'],
+                'a11y_description',
+                wp_kses( wp_unslash( $attachment['a11y_description'] ), $allowed_tags )
+            );
         }
         return $post;
     }

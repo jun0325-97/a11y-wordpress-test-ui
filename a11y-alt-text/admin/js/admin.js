@@ -482,7 +482,7 @@
             });
           }
         } catch (e) {
-          console.error("A11Y: Error clearing recovery session:", e);
+          console.error("A11Y.so: Error clearing recovery session:", e);
         }
       }
     );
@@ -1352,7 +1352,7 @@
       // Ask for consent
       const consent = confirm(
         __(
-          "[A11Y] Make sure to save any changes before proceeding -- any unsaved changes will be lost. Are you sure you want to continue?",
+          "[A11Y.so] Make sure to save any changes before proceeding -- any unsaved changes will be lost. Are you sure you want to continue?",
           "a11y-alt-text"
         )
       );
@@ -1570,7 +1570,7 @@
     }
 
     anchor.title = __(
-      "A11Y: Update alt text for this single image",
+      "A11Y.so: Update alt text for this single image",
       "a11y-alt-text"
     );
     anchor.onclick = function () {
@@ -1591,7 +1591,7 @@
     // Button icon
     const img = document.createElement("img");
     img.src = wp_a11y.icon_button_generate;
-    img.alt = __("Generate Alt Text with A11Y", "a11y-alt-text");
+    img.alt = __("Generate Alt Text with A11Y.so", "a11y-alt-text");
     anchor.appendChild(img);
 
     // Button label/text
@@ -1757,30 +1757,30 @@
     }
 
     // ── 2. 이미지 유형 뱃지
-    if (response.img_type) {
-      const badgeClass =
-        response.img_type === "복합형"
-          ? "a11y-type-complex"
-          : "a11y-type-simple";
+    //   if (response.img_type) {
+    //     const badgeClass =
+    //       response.img_type === "복합형"
+    //         ? "a11y-type-complex"
+    //         : "a11y-type-simple";
 
-      // post.php: PHP가 렌더링한 뱃지가 DOM에 있을 수 있음
-      let badge = document.querySelector(".a11y-type-badge");
+    //     // post.php: PHP가 렌더링한 뱃지가 DOM에 있을 수 있음
+    //     let badge = document.querySelector(".a11y-type-badge");
 
-      if (badge) {
-        badge.textContent = response.img_type;
-        badge.className = "a11y-type-badge " + badgeClass;
-      } else {
-        // upload.php 모달: 버튼 안에 뱃지 생성/업데이트
-        let inlineBadge = buttonEl.querySelector(".a11y-type-badge");
-        if (!inlineBadge) {
-          inlineBadge = document.createElement("span");
-          inlineBadge.style.cssText = "display:inline-block;margin-top:6px;";
-          buttonEl.appendChild(inlineBadge);
-        }
-        inlineBadge.className = "a11y-type-badge " + badgeClass;
-        inlineBadge.textContent = response.img_type;
-      }
-    }
+    //     if (badge) {
+    //       badge.textContent = response.img_type;
+    //       badge.className = "a11y-type-badge " + badgeClass;
+    //     } else {
+    //       // upload.php 모달: 버튼 안에 뱃지 생성/업데이트
+    //       let inlineBadge = buttonEl.querySelector(".a11y-type-badge");
+    //       if (!inlineBadge) {
+    //         inlineBadge = document.createElement("span");
+    //         inlineBadge.style.cssText = "display:none";
+    //         buttonEl.appendChild(inlineBadge);
+    //       }
+    //       inlineBadge.className = "a11y-type-badge " + badgeClass;
+    //       inlineBadge.textContent = response.img_type;
+    //     }
+    //   }
   }
 
   // Utility function to DRY up button injection logic

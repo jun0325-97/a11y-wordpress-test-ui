@@ -72,7 +72,7 @@
     </div>
 
     <div class="a11y-welcome-intro">
-      <p><?php esc_html_e( 'A11Y generates alt text and long descriptions so every visitor — including screen reader users — can experience your images. Complete the steps below to get started.', 'a11y-alt-text' ); ?></p>
+      <p><?php esc_html_e( 'A11Y.so generates alt text and long descriptions so every visitor — including screen reader users — can experience your images. Complete the steps below to get started.', 'a11y-alt-text' ); ?></p>
     </div>
 
     <div class="a11y-welcome-cards">
@@ -81,7 +81,7 @@
         <p class="a11y-welcome-card-title"><?php esc_html_e( 'Create your account', 'a11y-alt-text' ); ?></p>
         <p class="a11y-welcome-card-body"><?php printf(
           wp_kses(
-            __( 'Sign up for free at <a href="%s" target="_blank" rel="noopener noreferrer">a11y.so</a> to get your API key and access your image library.', 'a11y-alt-text' ),
+            __( 'Sign up for a free account at <a href="%s" target="_blank" rel="noopener noreferrer">a11y.so</a>', 'a11y-alt-text' ),
             array( 'a' => array( 'href' => array(), 'target' => array(), 'rel' => array() ) )
           ),
           'https://a11y.so?utm_source=wp'
@@ -92,7 +92,7 @@
         <p class="a11y-welcome-card-title"><?php esc_html_e( 'Connect your API key', 'a11y-alt-text' ); ?></p>
         <p class="a11y-welcome-card-body"><?php printf(
           wp_kses(
-            __( 'Paste your key from <a href="%s" target="_blank" rel="noopener noreferrer">Account &rarr; API Keys</a> into the field below and save.', 'a11y-alt-text' ),
+            __( 'Copy <a href="%s" target="_blank" rel="noopener noreferrer">your API key</a> from your account and enter it in the input field below.', 'a11y-alt-text' ),
             array( 'a' => array( 'href' => array(), 'target' => array(), 'rel' => array() ) )
           ),
           'https://a11y.so/account/api_keys'
@@ -103,7 +103,7 @@
         <p class="a11y-welcome-card-title"><?php esc_html_e( 'Generate alt text', 'a11y-alt-text' ); ?></p>
         <p class="a11y-welcome-card-body"><?php printf(
           wp_kses(
-            __( 'Use <a href="%s">Bulk Generate</a> for existing images. New uploads are handled automatically.', 'a11y-alt-text' ),
+            __( 'Once your API key is connected, you can use the image alt text generation feature.', 'a11y-alt-text' ),
             array( 'a' => array( 'href' => array() ) )
           ),
           esc_url( admin_url( 'admin.php?page=a11y-bulk-generate' ) )
@@ -140,14 +140,24 @@
   <?php if ( $has_api_key ) : ?>
   <div class="a11y-mock-banner" role="status">
     <span class="a11y-mock-badge">Mock Mode</span>
-    <p>The A11Y API is not yet connected. Any API Key value will work for testing — dummy data will be returned.</p>
+    <p>The A11Y.so API is not yet connected. Any API Key value will work for testing — dummy data will be returned.</p>
   </div>
   <?php endif; ?>
 
   <div class="a11y-settings-form-header">
-    <h1 class="a11y-settings-heading"><?php esc_html_e( 'A11Y Settings', 'a11y-alt-text' ); ?></h1>
+    <h1 class="a11y-settings-heading"><?php esc_html_e( 'A11Y.so WordPress Settings', 'a11y-alt-text' ); ?></h1>
+
+    <?php if ( ! $settings_network_controlled ) : ?>
+      <button
+        type="submit"
+        form="a11y-settings-form"
+        name="submit"
+        class="button button-primary a11y-header-save-btn"
+      >
+        <?php esc_html_e( 'Save Changes', 'a11y-alt-text' ); ?>
+      </button>
+    <?php endif; ?>
   </div>
-  <?php settings_errors(); ?>
 
   <?php if ( $settings_network_controlled || $api_key_locked ) : ?>
     <div class="notice notice-info a11y-network-controlled-notice">
@@ -217,7 +227,7 @@
                   <div class="a11y-api-status is-empty">
                     <?php printf(
                       wp_kses(
-                        __( 'Get your API Key at <a href="%s" target="_blank">A11Y &gt; Account &gt; API Keys</a>.', 'a11y-alt-text' ),
+                        __( 'Get your API Key at <a href="%s" target="_blank">A11Y.so &gt; Account &gt; API Keys</a>.', 'a11y-alt-text' ),
                         array( 'a' => array( 'href' => array(), 'target' => array() ) )
                       ),
                       esc_url( 'https://a11y.so/account/api_keys' )
@@ -417,7 +427,7 @@
                          <?php checked( 'yes', A11Y_Utility::get_setting( 'a11y_enabled', 'yes' ) ); ?>>
                   <div>
                     <label for="a11y_enabled" class="a11y-checkbox-label">
-                      <?php esc_html_e( 'Automatically generate alt text with A11Y.', 'a11y-alt-text' ); ?>
+                      <?php esc_html_e( 'Automatically generate alt text with A11Y.so.', 'a11y-alt-text' ); ?>
                     </label>
                     <p class="a11y-checkbox-desc">
                       <?php esc_html_e( 'Note: You can always generate alt text using the Bulk Generate page or Update Alt Text button on an individual image.', 'a11y-alt-text' ); ?>
@@ -542,7 +552,7 @@
                       <?php esc_html_e( 'This site is reachable over the public internet.', 'a11y-alt-text' ); ?>
                     </label>
                     <p class="a11y-checkbox-desc">
-                      <?php esc_html_e( 'Check to allow A11Y to fetch your images via URLs. If this site is private, uncheck this box and images will be uploaded to A11Y instead.', 'a11y-alt-text' ); ?>
+                      <?php esc_html_e( 'Check to allow A11Y.so to fetch your images via URLs. If this site is private, uncheck this box and images will be uploaded to A11Y.so instead.', 'a11y-alt-text' ); ?>
                     </p>
                   </div>
                 </div>
@@ -583,7 +593,7 @@
                   <?php endforeach; ?>
                 </select>
                 <p class="description">
-                  <?php esc_html_e( 'Control which user roles can access the A11Y admin menu.', 'a11y-alt-text' ); ?>
+                  <?php esc_html_e( 'Control which user roles can access the A11Y.so admin menu.', 'a11y-alt-text' ); ?>
                 </p>
               </td>
             </tr>
@@ -659,10 +669,10 @@
 
     <!-- 저장 버튼 + 버전 표시 -->
     <div class="a11y-settings-footer">
-      <?php if ( ! $settings_network_controlled ) :
-        submit_button( __( 'Save Changes', 'a11y-alt-text' ), 'primary', 'submit', false );
-      endif; ?>
       <span class="a11y-version">v<?php echo esc_html( A11Y_VERSION ); ?></span>
+      <?php if ( ! $settings_network_controlled ) :
+        submit_button( __( 'Save Changes', 'a11y-alt-text' ), 'primary a11y-header-save-btn', 'submit', false );
+      endif; ?>
     </div>
 
   </form>

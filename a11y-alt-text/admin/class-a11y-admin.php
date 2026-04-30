@@ -5,8 +5,8 @@
  * @link       https://a11y.so
  * @since      1.0.0
  *
- * @package    A11Y
- * @subpackage A11Y/admin
+ * @package    A11Y.so
+ * @subpackage A11Y.so/admin
  */
 
 /**
@@ -15,9 +15,9 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    A11Y
- * @subpackage A11Y/admin
- * @author     A11Y <info@a11y.so>
+ * @package    A11Y.so
+ * @subpackage A11Y.so/admin
+ * @author     A11Y.so <info@a11y.so>
  */
 class A11Y_Admin {
 	/**
@@ -140,7 +140,7 @@ class A11Y_Admin {
 
     printf(
       wp_kses(
-        __( '[A11Y] Thanks for installing A11Y! To complete setup, please <a href="%s">go to the settings page.</a>', 'a11y-alt-text' ),
+        __( '[A11Y.so] Thanks for installing A11Y.so! To complete setup, please <a href="%s">go to the settings page.</a>', 'a11y-alt-text' ),
         array( 'a' => array( 'href' => array() ) )
       ),
       esc_url(admin_url( 'admin.php?page=a11y' ))
@@ -155,14 +155,27 @@ class A11Y_Admin {
    * @since 0.1.0
    */
   public function register_attachment_meta() {
+      $allowed_tags = array(
+          'p'      => array(),
+          'br'     => array(),
+          'ul'     => array(), 'ol' => array(), 'li' => array(),
+          'strong' => array(), 'em' => array(),
+          'h1'     => array(),'h2'     => array(), 'h3' => array(), 'h4' => array(),
+          'table'  => array(), 'thead' => array(), 'tbody' => array(),
+          'tr'     => array(), 'th' => array('scope' => array()), 'td' => array(),
+          'caption'=> array(),
+      );
+
       register_post_meta( 'attachment', 'a11y_description', array(
-          'show_in_rest'  => true,
-          'single'        => true,
-          'type'          => 'string',
-          'auth_callback' => function () {
+          'show_in_rest'      => true,
+          'single'            => true,
+          'type'              => 'string',
+          'auth_callback'     => function () {
               return current_user_can( 'upload_files' );
           },
-          'sanitize_callback' => 'sanitize_textarea_field',
+          'sanitize_callback' => function( $value ) use ( $allowed_tags ) {
+              return wp_kses( $value, $allowed_tags );
+          },
       ) );
   }
 }

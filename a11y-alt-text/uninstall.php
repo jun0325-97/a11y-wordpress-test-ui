@@ -8,7 +8,7 @@
  * @link       https://a11y.so
  * @since      1.0.0
  *
- * @package    A11Y
+ * @package    A11Y.so
  */
 
 // If uninstall not called from WordPress, then exit.

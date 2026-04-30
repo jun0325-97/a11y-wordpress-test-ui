@@ -322,7 +322,7 @@ SQL;
               <?php esc_html_e( 'Skip previously processed', 'a11y-alt-text' ); ?>
             </label>
             <p class="a11y-checkbox-desc">
-              <?php esc_html_e( 'Skip images that have already been processed by A11Y.', 'a11y-alt-text' ); ?>
+              <?php esc_html_e( 'Skip images that have already been processed by A11Y.so.', 'a11y-alt-text' ); ?>
             </p>
           </div>
         </div>

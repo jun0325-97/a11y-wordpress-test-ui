@@ -117,12 +117,16 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px 6px;
-  border-radius: 4px;
+  padding: 3px 8px 5px;
+  border-radius: 99px;
   text-decoration: none;
+  transition: 0.2s ease;
 }
 .a11y-welcome-dismiss:hover {
-  color: var(--a11y-gray-800);
+  background-color: var(--a11y-gray-100);
+}
+.a11y-welcome-dismiss svg {
+  margin-top: 3px;
 }
 
 /* 소개 문구 */
@@ -139,7 +143,7 @@
 .a11y-welcome-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 24px;
   margin-top: 16px;
   /* padding: 0 20px; */
 }
@@ -315,6 +319,13 @@
 /* ==========================================================================
    Form Table
    ========================================================================== */
+.a11y-wrap .a11y-settings-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
 .a11y-wrap .a11y-settings-heading {
   font-weight: 700;
   font-size: 28px;
@@ -453,13 +464,12 @@
 }
 
 .a11y-radio-card:hover {
-  border-color: var(--a11y-primary);
+  border-color: var(--a11y-gray-500);
 }
 
 .a11y-radio-card.is-selected {
-  border-color: var(--a11y-primary);
+  border-color: var(--a11y-gray-500);
   background: var(--a11y-primary-100);
-  box-shadow: 0 0 0 1px var(--a11y-primary);
 }
 
 .a11y-radio-card-label {
@@ -477,16 +487,16 @@
   margin-top: 0;
 }
 
-.a11y-radio-card-title {
+.a11y-radio-card .a11y-radio-card-title {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.a11y-radio-card-desc {
+.a11y-radio-card .a11y-radio-card-desc {
   margin: 6px 0 0 22px;
-  font-size: 12px;
-  color: var(--a11y-gray-500);
+  font-size: 13px;
+  color: var(--a11y-gray-700);
   line-height: 1.5;
 }
 
@@ -503,8 +513,9 @@
 }
 
 .a11y-radio-card-list li::before {
-  content: "→ ";
-  color: var(--a11y-primary);
+  content: "●";
+  margin-right: 2px;
+  color: var(--a11y-gray-400);
   font-weight: 600;
 }
 
@@ -523,7 +534,8 @@
    버튼 — 앨리 primary blue
    ========================================================================== */
 .a11y-settings-form .button-primary,
-#a11y-settings-form .button-primary {
+#a11y-settings-form .button-primary,
+.button.a11y-header-save-btn {
   background: var(--a11y-primary-500);
   border-color: var(--a11y-primary-600);
   color: #fff;
@@ -531,15 +543,23 @@
   box-shadow: none;
 }
 .a11y-settings-form .button-primary:hover,
-#a11y-settings-form .button-primary:hover {
+#a11y-settings-form .button-primary:hover,
+.button.a11y-header-save-btn:hover {
   background: var(--a11y-primary-600);
   border-color: var(--a11y-primary-700);
   color: #fff;
 }
 .a11y-settings-form .button-primary:focus,
-#a11y-settings-form .button-primary:focus {
+#a11y-settings-form .button-primary:focus,
+.button.a11y-header-save-btn:focus {
   box-shadow: 0 0 0 2px var(--a11y-primary-300);
   outline: none;
+}
+
+.button.a11y-header-save-btn {
+  min-height: 38px;
+  padding-inline: 16px;
+  border-radius: 10px;
 }
 
 .a11y-wrap .button {

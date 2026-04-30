@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: A11Y - AI Alt Text & Accessibility
- * Description: AI 기반 이미지 대체 텍스트 + 접근성 구조(aria-describedby) 자동 생성
+ * Plugin Name: A11Y.so
+ * Description: Use A11Y.so to automatically generate AI-powered image alt text that enhances web accessibility.
  * Version: 0.1.0
- * Author: A11Y.SO
+ * Author: A11Y.so
  * Author URI: https://a11y.so/
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
